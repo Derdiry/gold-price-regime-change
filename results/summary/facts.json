@@ -1,0 +1,173 @@
+{
+  "data": {
+    "raw_rows": 2528,
+    "v2_daily_rows": 2908,
+    "v2_observed_rows": 1425
+  },
+  "fx": {
+    "first": {
+      "date": "2015-01-06",
+      "sdg_per_usd": 8.38
+    },
+    "last": {
+      "date": "2022-12-22",
+      "sdg_per_usd": 539.6
+    },
+    "peak": {
+      "date": "2022-03-16",
+      "sdg_per_usd": 601.7
+    },
+    "usd_value_lost_first_to_last_pct": 98.44699777613046,
+    "usd_value_lost_first_to_peak_pct": 98.60727937510387,
+    "years_first_to_last": 7.96,
+    "observed_steps": 1424,
+    "observed_steps_unchanged": 78,
+    "median_abs_step_pct": 0.6335128356973696,
+    "across_gap": {
+      "from": "2019-11-25",
+      "fx_from": 79.06,
+      "to": "2021-01-02",
+      "fx_to": 231.56
+    },
+    "largest_steps_after_gap": [
+      {
+        "from": "2022-03-07",
+        "fx_from": 454.62,
+        "to": "2022-03-09",
+        "fx_to": 567.8
+      },
+      {
+        "from": "2021-03-10",
+        "fx_from": 289.06,
+        "to": "2021-03-22",
+        "fx_to": 357.93
+      }
+    ]
+  },
+  "variance": {
+    "r2_logprice_on_logfx_observed": 0.9976326577645904,
+    "r2_logprice_on_logintl_observed": 0.8238059204814219,
+    "observed_rows": 1425
+  },
+  "range": {
+    "sudan": {
+      "train_max": 3270.0,
+      "test_min": 20818.0,
+      "test_max": 32525.0,
+      "test_min_over_train_max": 6.366360856269113,
+      "test_max_over_train_max": 9.946483180428135,
+      "train_end": "2020-08-01",
+      "test_start": "2021-10-12"
+    },
+    "global": {
+      "target": "gold_close",
+      "train_max": 1888.699951171875,
+      "test_days": 917,
+      "test_days_above_train_max": 513
+    }
+  },
+  "models": {
+    "n_params_seed1": {
+      "gru_global_h1_log_return_s1": 168449,
+      "gru_global_h1_minmax_s1": 168449,
+      "gru_global_h1_revin_s1": 168449,
+      "gru_global_h30_log_return_s1": 170334,
+      "gru_global_h30_minmax_s1": 170334,
+      "gru_global_h30_revin_s1": 170334,
+      "gru_global_h7_log_return_s1": 168839,
+      "gru_global_h7_minmax_s1": 168839,
+      "gru_global_h7_revin_s1": 168839,
+      "gru_sudan_h1_log_return_s1": 169985,
+      "gru_sudan_h1_minmax_s1": 169985,
+      "gru_sudan_h1_revin_s1": 169985,
+      "gru_sudan_h30_log_return_s1": 171870,
+      "gru_sudan_h30_minmax_s1": 171870,
+      "gru_sudan_h30_revin_s1": 171870,
+      "gru_sudan_h7_log_return_s1": 170375,
+      "gru_sudan_h7_minmax_s1": 170375,
+      "gru_sudan_h7_revin_s1": 170375,
+      "lstm_global_h1_log_return_s1": 220801,
+      "lstm_global_h1_minmax_s1": 220801,
+      "lstm_global_h1_revin_s1": 220801,
+      "lstm_global_h30_log_return_s1": 222686,
+      "lstm_global_h30_minmax_s1": 222686,
+      "lstm_global_h30_revin_s1": 222686,
+      "lstm_global_h7_log_return_s1": 221191,
+      "lstm_global_h7_minmax_s1": 221191,
+      "lstm_global_h7_revin_s1": 221191,
+      "lstm_sudan_h1_log_return_s1": 222849,
+      "lstm_sudan_h1_minmax_s1": 222849,
+      "lstm_sudan_h1_revin_s1": 222849,
+      "lstm_sudan_h30_log_return_s1": 224734,
+      "lstm_sudan_h30_minmax_s1": 224734,
+      "lstm_sudan_h30_revin_s1": 224734,
+      "lstm_sudan_h7_log_return_s1": 223239,
+      "lstm_sudan_h7_minmax_s1": 223239,
+      "lstm_sudan_h7_revin_s1": 223239,
+      "patchtst_global_h1_log_return_s1": 34817,
+      "patchtst_global_h1_minmax_s1": 34817,
+      "patchtst_global_h1_revin_s1": 34817,
+      "patchtst_global_h30_log_return_s1": 196318,
+      "patchtst_global_h30_minmax_s1": 196318,
+      "patchtst_global_h30_revin_s1": 196318,
+      "patchtst_global_h7_log_return_s1": 68231,
+      "patchtst_global_h7_minmax_s1": 68231,
+      "patchtst_global_h7_revin_s1": 68231,
+      "patchtst_sudan_h1_log_return_s1": 37121,
+      "patchtst_sudan_h1_minmax_s1": 37121,
+      "patchtst_sudan_h1_revin_s1": 37121,
+      "patchtst_sudan_h30_log_return_s1": 220894,
+      "patchtst_sudan_h30_minmax_s1": 220894,
+      "patchtst_sudan_h30_revin_s1": 220894,
+      "patchtst_sudan_h7_log_return_s1": 75143,
+      "patchtst_sudan_h7_minmax_s1": 75143,
+      "patchtst_sudan_h7_revin_s1": 75143,
+      "tft_global_h1_log_return_s1": 42499,
+      "tft_global_h1_minmax_s1": 42499,
+      "tft_global_h1_revin_s1": 42499,
+      "tft_global_h30_log_return_s1": 42992,
+      "tft_global_h30_minmax_s1": 42992,
+      "tft_global_h30_revin_s1": 42992,
+      "tft_global_h7_log_return_s1": 42601,
+      "tft_global_h7_minmax_s1": 42601,
+      "tft_global_h7_revin_s1": 42601,
+      "tft_sudan_h1_log_return_s1": 48123,
+      "tft_sudan_h1_minmax_s1": 48123,
+      "tft_sudan_h1_revin_s1": 48123,
+      "tft_sudan_h30_log_return_s1": 48616,
+      "tft_sudan_h30_minmax_s1": 48616,
+      "tft_sudan_h30_revin_s1": 48616,
+      "tft_sudan_h7_log_return_s1": 48225,
+      "tft_sudan_h7_minmax_s1": 48225,
+      "tft_sudan_h7_revin_s1": 48225,
+      "tsmixer_global_h1_log_return_s1": 210897,
+      "tsmixer_global_h1_minmax_s1": 210897,
+      "tsmixer_global_h1_revin_s1": 210897,
+      "tsmixer_global_h30_log_return_s1": 212666,
+      "tsmixer_global_h30_minmax_s1": 212666,
+      "tsmixer_global_h30_revin_s1": 212666,
+      "tsmixer_global_h7_log_return_s1": 211263,
+      "tsmixer_global_h7_minmax_s1": 211263,
+      "tsmixer_global_h7_revin_s1": 211263,
+      "tsmixer_sudan_h1_log_return_s1": 219873,
+      "tsmixer_sudan_h1_minmax_s1": 219873,
+      "tsmixer_sudan_h1_revin_s1": 219873,
+      "tsmixer_sudan_h30_log_return_s1": 221642,
+      "tsmixer_sudan_h30_minmax_s1": 221642,
+      "tsmixer_sudan_h30_revin_s1": 221642,
+      "tsmixer_sudan_h7_log_return_s1": 220239,
+      "tsmixer_sudan_h7_minmax_s1": 220239,
+      "tsmixer_sudan_h7_revin_s1": 220239
+    },
+    "patchtst_min": 34817,
+    "patchtst_max": 220894,
+    "all_models_min": 34817,
+    "all_models_max": 224734,
+    "chronos_n_params": {
+      "mini": 20456192,
+      "small": 46154240
+    },
+    "saved_training_run_records": 675,
+    "phase3_run_records": 210
+  }
+}

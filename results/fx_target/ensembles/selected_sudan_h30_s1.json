@@ -1,0 +1,33 @@
+{
+  "route": "fx_target",
+  "horizon": 30,
+  "seed": 1,
+  "selection_rule": "top-2 by validation MAE",
+  "candidates_val_mae": {
+    "tft": 730.0886434110765,
+    "lstm": 876.8576691491213,
+    "gru": 975.8121118692204,
+    "patchtst": 982.6195304367211,
+    "tsmixer": 1182.7277539228542
+  },
+  "selected": [
+    "tft",
+    "lstm"
+  ],
+  "weights": [
+    0.9437120645473015,
+    0.056287935452698556
+  ],
+  "val_mae": 729.1789567276061,
+  "optimiser": {
+    "method": "SLSQP",
+    "success": true,
+    "message": "Optimization terminated successfully"
+  },
+  "val_price_mae": 729.1789567299024,
+  "provenance": {
+    "git_commit": "d32b43ae663b91461422bdd1cf995984f94cb58b",
+    "git_dirty": false,
+    "protocol": "v2"
+  }
+}

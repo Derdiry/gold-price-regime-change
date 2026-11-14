@@ -1,0 +1,73 @@
+{
+  "key": "ensemble_global_h7_minmax_s2",
+  "protocol": "v2",
+  "model": "ensemble",
+  "track": "global",
+  "horizon": 7,
+  "condition": "minmax",
+  "seed": 2,
+  "selection_rule": "top-2 by validation MAE",
+  "candidates_val_mae": {
+    "tsmixer": 26.776934297433648,
+    "tft": 47.3349297628563,
+    "gru": 64.87940822890882,
+    "lstm": 69.31688933227865,
+    "patchtst": 96.03846346723121
+  },
+  "selected": [
+    "tsmixer",
+    "tft"
+  ],
+  "weights": [
+    0.8878036300910094,
+    0.11219636990899061
+  ],
+  "val_mae": 26.374001702627346,
+  "optimiser": {
+    "method": "SLSQP",
+    "success": true,
+    "message": "Optimization terminated successfully"
+  },
+  "metrics": {
+    "val": {
+      "mae": 26.374001702422326,
+      "rmse": 38.49687005581783,
+      "mape": 1.6824555458423391,
+      "directional_accuracy": 49.29200755191945,
+      "directional_accuracy_nonzero": 49.67496432535278,
+      "directional_accuracy_max": 99.22907488986785,
+      "directional_accuracy_n_nonzero": 6307,
+      "da_origin": 51.17083136885117,
+      "da_origin_nonzero": 51.32408575031526,
+      "da_origin_max": 99.7013987112997,
+      "da_origin_n_nonzero": 6344,
+      "n_windows": 909,
+      "horizon": 7
+    },
+    "test": {
+      "mae": 50.20302835307923,
+      "rmse": 77.68511774451927,
+      "mape": 2.3545650653971255,
+      "directional_accuracy": 49.70172684458399,
+      "directional_accuracy_nonzero": 49.81120201384518,
+      "directional_accuracy_max": 99.78021978021978,
+      "directional_accuracy_n_nonzero": 6356,
+      "da_origin": 48.76901364277874,
+      "da_origin_nonzero": 48.81494270915084,
+      "da_origin_max": 99.90591187078563,
+      "da_origin_n_nonzero": 6371,
+      "n_windows": 911,
+      "horizon": 7
+    }
+  },
+  "member_records": [
+    "tsmixer_global_h7_minmax_s2",
+    "tft_global_h7_minmax_s2"
+  ],
+  "provenance": {
+    "git_commit": "70be18d51785c536a70025b5d3447e3c23a06dcb",
+    "git_dirty": true,
+    "protocol": "v2"
+  },
+  "config_sha256": "80e273a47d19daffc9be0d39c5decc92a709157a982ae97c000ddcdea8a3ed5a"
+}

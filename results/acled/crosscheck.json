@@ -1,0 +1,94 @@
+{
+  "provenance": {
+    "git_commit": "d707d2ada210632388385d38e82fd6ec8c61592f",
+    "git_dirty": true,
+    "protocol": "v2"
+  },
+  "info": {
+    "weekly_file": "Africa_aggregated_data_up_to_week_of-2026-10-17.xlsx",
+    "weekly_sha256": "d3c200e347a7dd4c1a8aeb23cc949f1ad633f84ab37d0b80b5024f168bf810cc",
+    "cmy_file": "number_of_political_violence_events_by_country-month-year_as-of-23Oct2026.xlsx",
+    "cmy_sha256": "a8459f0681c80c199e446653cce2fa6a4c404c122c3fadd6b19c932e88ce078d",
+    "period": [
+      "2014-10",
+      "2022-12"
+    ],
+    "political_violence_primary": "DISORDER_TYPE contains 'Political violence'",
+    "political_violence_event_types_sensitivity": [
+      "Battles",
+      "Explosions/Remote violence",
+      "Violence against civilians"
+    ],
+    "weekly_sudan_rows": 20198,
+    "weekly_rows_in_period": 6945,
+    "weeks_in_period": 432,
+    "weeks_in_period_spanning_two_months": 87,
+    "admin1_in_period": [
+      "Abyei",
+      "Al Jazirah",
+      "Blue Nile",
+      "Central Darfur",
+      "East Darfur",
+      "Gedaref",
+      "Kassala",
+      "Khartoum",
+      "North Darfur",
+      "North Kordofan",
+      "Northern",
+      "Red Sea",
+      "River Nile",
+      "Sennar",
+      "South Darfur",
+      "South Kordofan",
+      "West Darfur",
+      "West Kordofan",
+      "White Nile"
+    ],
+    "event_types_in_period": {
+      "Battles": 1633,
+      "Explosions/Remote violence": 663,
+      "Protests": 4892,
+      "Riots": 444,
+      "Strategic developments": 579,
+      "Violence against civilians": 3458
+    }
+  },
+  "checks": {
+    "primary (DISORDER_TYPE contains 'Political violence', prorata)": {
+      "months": 99,
+      "pearson_r": 0.9957907455653096,
+      "mean_abs_diff": 2.10966810966811,
+      "total_built": 6218.428571428572,
+      "total_cmy": 6217.0,
+      "n_months_over_tol": 26,
+      "tol_pct": 5.0
+    },
+    "sensitivity (DISORDER_TYPE, week start)": {
+      "months": 99,
+      "pearson_r": 0.9677041718315982,
+      "mean_abs_diff": 6.2727272727272725,
+      "total_built": 6236.0,
+      "total_cmy": 6217.0,
+      "n_months_over_tol": 76,
+      "tol_pct": 5.0
+    },
+    "sensitivity (3 event types, prorata)": {
+      "months": 99,
+      "pearson_r": 0.9727454349489283,
+      "mean_abs_diff": 5.718614718614719,
+      "total_built": 5729.142857142858,
+      "total_cmy": 6217.0,
+      "n_months_over_tol": 59,
+      "tol_pct": 5.0
+    },
+    "sensitivity (3 event types, week start)": {
+      "months": 99,
+      "pearson_r": 0.9471040812765299,
+      "mean_abs_diff": 8.383838383838384,
+      "total_built": 5745.0,
+      "total_cmy": 6217.0,
+      "n_months_over_tol": 75,
+      "tol_pct": 5.0
+    }
+  }
+}

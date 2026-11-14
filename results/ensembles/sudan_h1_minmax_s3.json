@@ -1,0 +1,73 @@
+{
+  "key": "ensemble_sudan_h1_minmax_s3",
+  "protocol": "v2",
+  "model": "ensemble",
+  "track": "sudan",
+  "horizon": 1,
+  "condition": "minmax",
+  "seed": 3,
+  "selection_rule": "top-2 by validation MAE",
+  "candidates_val_mae": {
+    "patchtst": 1988.4463547505604,
+    "tsmixer": 2154.0064155339123,
+    "gru": 12238.902015309697,
+    "lstm": 14194.804974337865,
+    "tft": 17088.580125201443
+  },
+  "selected": [
+    "patchtst",
+    "tsmixer"
+  ],
+  "weights": [
+    1.0,
+    0.0
+  ],
+  "val_mae": 1988.4463547689234,
+  "optimiser": {
+    "method": "SLSQP",
+    "success": true,
+    "message": "Optimization terminated successfully"
+  },
+  "metrics": {
+    "val": {
+      "mae": 1988.4463547505604,
+      "rmse": 2225.137380638685,
+      "mape": 9.829694913957097,
+      "directional_accuracy": 15.315315315315313,
+      "directional_accuracy_nonzero": 55.73770491803278,
+      "directional_accuracy_max": 27.47747747747748,
+      "directional_accuracy_n_nonzero": 61,
+      "da_origin": 12.556053811659194,
+      "da_origin_nonzero": 45.90163934426229,
+      "da_origin_max": 27.3542600896861,
+      "da_origin_n_nonzero": 61,
+      "n_windows": 223,
+      "horizon": 1
+    },
+    "test": {
+      "mae": 3593.3332960883868,
+      "rmse": 4225.618050466866,
+      "mape": 13.152900378888276,
+      "directional_accuracy": 10.77981651376147,
+      "directional_accuracy_nonzero": 51.08695652173913,
+      "directional_accuracy_max": 21.100917431192663,
+      "directional_accuracy_n_nonzero": 92,
+      "da_origin": 9.839816933638444,
+      "da_origin_nonzero": 46.236559139784944,
+      "da_origin_max": 21.28146453089245,
+      "da_origin_n_nonzero": 93,
+      "n_windows": 437,
+      "horizon": 1
+    }
+  },
+  "member_records": [
+    "patchtst_sudan_h1_minmax_s3",
+    "tsmixer_sudan_h1_minmax_s3"
+  ],
+  "provenance": {
+    "git_commit": "70be18d51785c536a70025b5d3447e3c23a06dcb",
+    "git_dirty": true,
+    "protocol": "v2"
+  },
+  "config_sha256": "80e273a47d19daffc9be0d39c5decc92a709157a982ae97c000ddcdea8a3ed5a"
+}

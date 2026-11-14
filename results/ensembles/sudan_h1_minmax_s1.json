@@ -1,0 +1,73 @@
+{
+  "key": "ensemble_sudan_h1_minmax_s1",
+  "protocol": "v2",
+  "model": "ensemble",
+  "track": "sudan",
+  "horizon": 1,
+  "condition": "minmax",
+  "seed": 1,
+  "selection_rule": "top-2 by validation MAE",
+  "candidates_val_mae": {
+    "tsmixer": 3731.989870901065,
+    "patchtst": 4198.522592313621,
+    "gru": 11784.749189847253,
+    "lstm": 13400.68574174958,
+    "tft": 17272.99852639784
+  },
+  "selected": [
+    "tsmixer",
+    "patchtst"
+  ],
+  "weights": [
+    1.0,
+    0.0
+  ],
+  "val_mae": 3731.989870917935,
+  "optimiser": {
+    "method": "SLSQP",
+    "success": true,
+    "message": "Optimization terminated successfully"
+  },
+  "metrics": {
+    "val": {
+      "mae": 3731.989870901065,
+      "rmse": 4053.286904084283,
+      "mape": 18.508301388804494,
+      "directional_accuracy": 16.216216216216218,
+      "directional_accuracy_nonzero": 59.01639344262295,
+      "directional_accuracy_max": 27.47747747747748,
+      "directional_accuracy_n_nonzero": 61,
+      "da_origin": 12.10762331838565,
+      "da_origin_nonzero": 44.26229508196721,
+      "da_origin_max": 27.3542600896861,
+      "da_origin_n_nonzero": 61,
+      "n_windows": 223,
+      "horizon": 1
+    },
+    "test": {
+      "mae": 3091.112753861556,
+      "rmse": 3901.2296164967797,
+      "mape": 11.610356045843337,
+      "directional_accuracy": 8.944954128440367,
+      "directional_accuracy_nonzero": 42.391304347826086,
+      "directional_accuracy_max": 21.100917431192663,
+      "directional_accuracy_n_nonzero": 92,
+      "da_origin": 9.382151029748284,
+      "da_origin_nonzero": 44.086021505376344,
+      "da_origin_max": 21.28146453089245,
+      "da_origin_n_nonzero": 93,
+      "n_windows": 437,
+      "horizon": 1
+    }
+  },
+  "member_records": [
+    "tsmixer_sudan_h1_minmax_s1",
+    "patchtst_sudan_h1_minmax_s1"
+  ],
+  "provenance": {
+    "git_commit": "6bb65f5ded6718bf36a4a4754679803e00ee24bf",
+    "git_dirty": true,
+    "protocol": "v2"
+  },
+  "config_sha256": "80e273a47d19daffc9be0d39c5decc92a709157a982ae97c000ddcdea8a3ed5a"
+}

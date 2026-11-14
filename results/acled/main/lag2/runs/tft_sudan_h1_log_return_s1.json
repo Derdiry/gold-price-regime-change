@@ -1,0 +1,352 @@
+{
+  "key": "tft_sudan_h1_log_return_s1",
+  "protocol": "v2",
+  "model": "tft",
+  "track": "sudan",
+  "horizon": 1,
+  "condition": "log_return",
+  "seed": 1,
+  "metrics": {
+    "val": {
+      "mae": 92.98731852088066,
+      "rmse": 294.65188007486955,
+      "mape": 0.4679365779142769,
+      "directional_accuracy": 17.117117117117118,
+      "directional_accuracy_nonzero": 62.295081967213115,
+      "directional_accuracy_max": 27.47747747747748,
+      "directional_accuracy_n_nonzero": 61,
+      "da_origin": 10.762331838565023,
+      "da_origin_nonzero": 39.34426229508197,
+      "da_origin_max": 27.3542600896861,
+      "da_origin_n_nonzero": 61,
+      "n_windows": 223,
+      "horizon": 1
+    },
+    "test": {
+      "mae": 110.51781798733872,
+      "rmse": 388.0389107537014,
+      "mape": 0.41564819594109986,
+      "directional_accuracy": 8.944954128440367,
+      "directional_accuracy_nonzero": 42.391304347826086,
+      "directional_accuracy_max": 21.100917431192663,
+      "directional_accuracy_n_nonzero": 92,
+      "da_origin": 12.128146453089245,
+      "da_origin_nonzero": 56.98924731182796,
+      "da_origin_max": 21.28146453089245,
+      "da_origin_n_nonzero": 93,
+      "n_windows": 437,
+      "horizon": 1
+    }
+  },
+  "selection_metric": "val_mae",
+  "n_params": {
+    "total": 50983,
+    "trainable": 50983,
+    "non_trainable": 0
+  },
+  "epochs_trained": 53,
+  "max_epochs": 100,
+  "early_stopping_patience": 10,
+  "stopped_early": true,
+  "sensitivity": null,
+  "variant": "acled_lag2",
+  "target_col": "price_sdg",
+  "best_epoch": 43,
+  "effective_batch_size": 8,
+  "train_seconds": 427.3,
+  "seconds_per_epoch": 8.06,
+  "n_features": 35,
+  "feature_cols": [
+    "price_sdg",
+    "intl_price_usd",
+    "fx_rate",
+    "open",
+    "high",
+    "low",
+    "volume",
+    "fx_premium",
+    "fx_rate_log",
+    "fx_rate_change",
+    "parity_price",
+    "local_intl_spread",
+    "regime_1",
+    "regime_2",
+    "price_usd_gram",
+    "sudan_intl_ratio",
+    "sma_20",
+    "sma_50",
+    "sma_200",
+    "ema_12",
+    "ema_26",
+    "rsi",
+    "macd",
+    "macd_signal",
+    "macd_hist",
+    "bb_upper",
+    "bb_lower",
+    "bb_width",
+    "bb_pct",
+    "return_1d",
+    "return_5d",
+    "return_20d",
+    "rolling_vol",
+    "pv_events_lag2m",
+    "pv_fatalities_lag2m"
+  ],
+  "transfer": null,
+  "windows": {
+    "train": 1705,
+    "val": 223,
+    "test": 437
+  },
+  "provenance": {
+    "git_commit": "fb1e07172bd01c52d15aba2c44e4b3bfc3850ba0",
+    "git_dirty": false,
+    "protocol": "v2"
+  },
+  "config_sha256": "b4494eef0ff4f501491d191c3d42d9aadfd47494e26323aaac60fb04366bbfff",
+  "config": {
+    "data": {
+      "global": {
+        "tickers": {
+          "gold_futures": "GC=F",
+          "gold_etf": "GLD",
+          "usd_index": "UUP",
+          "brent_crude": "BNO"
+        },
+        "fred_series": {
+          "treasury_10y": "DGS10",
+          "cpi": "CPIAUCSL",
+          "m2": "M2SL"
+        },
+        "start_date": "2000-01-01",
+        "end_date": "2024-12-31"
+      },
+      "sudan": {
+        "raw_file": "data/raw/new_Data.csv",
+        "duplicate_date_rule": "first",
+        "max_ffill_gap_days": 30,
+        "world_bank": {
+          "country_code": "SDN",
+          "indicators": {
+            "cpi": "FP.CPI.TOTL.ZG",
+            "gdp": "NY.GDP.MKTP.CD",
+            "official_fx": "PA.NUS.FCRF"
+          }
+        },
+        "acled_file": "data/raw/sudan/acled_sudan.csv",
+        "regional_tickers": {
+          "egypt_etf": "EGPT"
+        },
+        "start_date": "2015-01-01",
+        "end_date": "2022-12-31"
+      },
+      "target_col": "price_sdg",
+      "global_target_col": "gold_close",
+      "date_col": "date"
+    },
+    "features": {
+      "technical": {
+        "sma_windows": [
+          20,
+          50,
+          200
+        ],
+        "ema_windows": [
+          12,
+          26
+        ],
+        "rsi_window": 14,
+        "macd_fast": 12,
+        "macd_slow": 26,
+        "macd_signal": 9,
+        "bollinger_window": 20,
+        "bollinger_std": 2,
+        "atr_window": 14
+      },
+      "lags": {
+        "return_lags": [
+          1,
+          5,
+          20
+        ],
+        "rolling_vol_window": 20
+      },
+      "sudan_specific": {
+        "regime_breakpoints": [
+          "2019-04-11",
+          "2021-10-25"
+        ],
+        "conflict_lag_windows": [
+          1,
+          2,
+          3
+        ],
+        "fx_premium_col": "fx_rate"
+      }
+    },
+    "split": {
+      "train_ratio": 0.7,
+      "val_ratio": 0.15,
+      "test_ratio": 0.15,
+      "shuffle": false
+    },
+    "sequence": {
+      "input_length": 60,
+      "horizons": [
+        1,
+        7,
+        30
+      ],
+      "default_horizon": 7
+    },
+    "walk_forward": {
+      "initial_train_ratio": 0.7,
+      "step_size": 30,
+      "min_train_size": 252
+    },
+    "models": {
+      "lstm": {
+        "units": 128,
+        "num_layers": 2,
+        "dropout": 0.2,
+        "recurrent_dropout": 0.0,
+        "dense_units": 64,
+        "activation": "relu"
+      },
+      "gru": {
+        "units": 128,
+        "num_layers": 2,
+        "dropout": 0.2,
+        "recurrent_dropout": 0.0,
+        "dense_units": 64,
+        "activation": "relu"
+      },
+      "tsmixer": {
+        "n_block": 4,
+        "ff_dim": 64,
+        "dropout": 0.2,
+        "norm_type": "L",
+        "activation": "relu"
+      },
+      "patchtst": {
+        "patch_len": 16,
+        "stride": 8,
+        "d_model": 32,
+        "n_heads": 2,
+        "num_encoder_layers": 2,
+        "d_ff": 64,
+        "dropout": 0.1,
+        "activation": "gelu"
+      },
+      "tft": {
+        "hidden_size": 16,
+        "lstm_layers": 1,
+        "num_attention_heads": 1,
+        "dropout": 0.1,
+        "hidden_continuous_size": 4
+      },
+      "chronos": {
+        "model_id": "amazon/chronos-t5-mini",
+        "fine_tune": false,
+        "fine_tune_epochs": 10,
+        "fine_tune_lr": 1e-05
+      },
+      "ensemble": {
+        "method": "weighted_avg",
+        "top_n": 2
+      }
+    },
+    "training": {
+      "batch_size": 8,
+      "max_epochs": 100,
+      "early_stopping_patience": 10,
+      "early_stopping_monitor": "val_mae",
+      "optimizer": "adam",
+      "learning_rate": 0.001,
+      "loss": "mae",
+      "metrics": [
+        "mae",
+        "mse"
+      ],
+      "batch_size_overrides": {
+        "patchtst": {
+          "global": 8,
+          "sudan": 4
+        },
+        "tft": {
+          "global": 8,
+          "sudan": 8
+        }
+      },
+      "min_free_memory_gb": 3.0,
+      "fine_tune": {
+        "freeze_layers": 1,
+        "learning_rate": 0.0001,
+        "max_epochs": 50,
+        "early_stopping_patience": 7
+      },
+      "mc_dropout": {
+        "enabled": true,
+        "n_samples": 100
+      }
+    },
+    "experiment": {
+      "condition": "log_return",
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "conflict": {
+        "lag": 2,
+        "definition": "disorder_type",
+        "rule": "prorata",
+        "transform": "log1p",
+        "series": [
+          "pv_events",
+          "pv_fatalities"
+        ],
+        "monthly_sha256": "179800ea7b6dbf13037ef69857759d69a531e12eb9e8e3cd2a233b09f2f0d7e1"
+      },
+      "variant": "acled_lag2",
+      "extra_features": [
+        "pv_events_lag2m",
+        "pv_fatalities_lag2m"
+      ]
+    },
+    "mlflow": {
+      "tracking_uri": "mlruns",
+      "protocol": "v2",
+      "experiment_global": "gold-global-v2-acled",
+      "experiment_sudan": "gold-sudan-v2-acled",
+      "registered_model_prefix": "gold-v2"
+    },
+    "evaluation": {
+      "metrics": [
+        "mae",
+        "rmse",
+        "mape",
+        "directional_accuracy"
+      ],
+      "drift_threshold": 1.5
+    },
+    "paths": {
+      "raw_data": "data/raw",
+      "processed_data": "logs/v2/acled/main/lag2/processed",
+      "results": "results/acled/main/lag2",
+      "runs": "logs/v2/acled/main/lag2",
+      "features": "logs/v2/acled/main/lag2/features",
+      "scalers": "logs/v2/acled/main/lag2/scalers",
+      "models": "mlruns",
+      "logs": "logs"
+    }
+  },
+  "mlflow_run_id": "91b48b10c8a54f8896299ee3076a04c9",
+  "test_evaluated_at": "2026-11-01 02:46:46",
+  "test_provenance": {
+    "git_commit": "fb1e07172bd01c52d15aba2c44e4b3bfc3850ba0",
+    "git_dirty": false,
+    "protocol": "v2"
+  }
+}

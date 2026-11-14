@@ -1,0 +1,469 @@
+{
+  "rule": "Lowest validation MAE in original price units per (model, track, horizon); conditions within 1% of the lowest MAE are tied and the simplest is chosen, in the order minmax < log_return < revin. Seed 1 only.",
+  "tie_tolerance": 0.01,
+  "simplicity_order": [
+    "minmax",
+    "log_return",
+    "revin"
+  ],
+  "caveat": "Sudan validation has only 223 / 217 / 194 windows (h = 1 / 7 / 30), all from one 7-month period (2021-03 \u2192 2021-10) after the 404-day gap, so the Sudan selection is noisy; global validation has 915 / 909 / 886 windows (2017-09 \u2192 2021-05).",
+  "seed": 1,
+  "provenance": {
+    "git_commit": "8ab2c8a8ac752800deeaa836b17ec906df82e8c4",
+    "git_dirty": false,
+    "protocol": "v2"
+  },
+  "selection": {
+    "lstm_sudan_h1": {
+      "model": "lstm",
+      "track": "sudan",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 13400.68574174958,
+        "log_return": 101.25185582941081,
+        "revin": 193.56760226836235
+      },
+      "n_val_windows": 223
+    },
+    "gru_sudan_h1": {
+      "model": "gru",
+      "track": "sudan",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 11784.749189847253,
+        "log_return": 107.66954232418848,
+        "revin": 174.36946274244005
+      },
+      "n_val_windows": 223
+    },
+    "tsmixer_sudan_h1": {
+      "model": "tsmixer",
+      "track": "sudan",
+      "horizon": 1,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_mae": {
+        "minmax": 3731.989870901065,
+        "log_return": 191.8165536638266,
+        "revin": 177.50199601656522
+      },
+      "n_val_windows": 223
+    },
+    "patchtst_sudan_h1": {
+      "model": "patchtst",
+      "track": "sudan",
+      "horizon": 1,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_mae": {
+        "minmax": 4198.522592313621,
+        "log_return": 672.4427249079059,
+        "revin": 434.80422329793936
+      },
+      "n_val_windows": 223
+    },
+    "tft_sudan_h1": {
+      "model": "tft",
+      "track": "sudan",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 17272.99852639784,
+        "log_return": 94.46375039928444,
+        "revin": 104.02587796903377
+      },
+      "n_val_windows": 223
+    },
+    "lstm_sudan_h7": {
+      "model": "lstm",
+      "track": "sudan",
+      "horizon": 7,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 14481.450485259627,
+        "log_return": 303.0454056930916,
+        "revin": 416.22092739215685
+      },
+      "n_val_windows": 217
+    },
+    "gru_sudan_h7": {
+      "model": "gru",
+      "track": "sudan",
+      "horizon": 7,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 11725.64674024852,
+        "log_return": 314.3403252532885,
+        "revin": 431.6796296526869
+      },
+      "n_val_windows": 217
+    },
+    "tsmixer_sudan_h7": {
+      "model": "tsmixer",
+      "track": "sudan",
+      "horizon": 7,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_mae": {
+        "minmax": 4378.218653565256,
+        "log_return": 551.0135084219075,
+        "revin": 519.2056949153939
+      },
+      "n_val_windows": 217
+    },
+    "patchtst_sudan_h7": {
+      "model": "patchtst",
+      "track": "sudan",
+      "horizon": 7,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 7621.705046622984,
+        "log_return": 352.0389841291582,
+        "revin": 681.2708208904626
+      },
+      "n_val_windows": 217
+    },
+    "tft_sudan_h7": {
+      "model": "tft",
+      "track": "sudan",
+      "horizon": 7,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 16788.719081253344,
+        "log_return": 303.28518449117684,
+        "revin": 323.77650654520784
+      },
+      "n_val_windows": 217
+    },
+    "lstm_sudan_h30": {
+      "model": "lstm",
+      "track": "sudan",
+      "horizon": 30,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_mae": {
+        "minmax": 14526.132838592004,
+        "log_return": 893.2566019024196,
+        "revin": 792.5241807780427
+      },
+      "n_val_windows": 194
+    },
+    "gru_sudan_h30": {
+      "model": "gru",
+      "track": "sudan",
+      "horizon": 30,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 12534.878037495302,
+        "log_return": 860.3220984793403,
+        "revin": 878.7163243242162
+      },
+      "n_val_windows": 194
+    },
+    "tsmixer_sudan_h30": {
+      "model": "tsmixer",
+      "track": "sudan",
+      "horizon": 30,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_mae": {
+        "minmax": 4603.693996405847,
+        "log_return": 1904.4286223839667,
+        "revin": 1117.2474522537834
+      },
+      "n_val_windows": 194
+    },
+    "patchtst_sudan_h30": {
+      "model": "patchtst",
+      "track": "sudan",
+      "horizon": 30,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 9406.17852174949,
+        "log_return": 871.8981449290318,
+        "revin": 1029.9139618316776
+      },
+      "n_val_windows": 194
+    },
+    "tft_sudan_h30": {
+      "model": "tft",
+      "track": "sudan",
+      "horizon": 30,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_mae": {
+        "minmax": 17720.85202246597,
+        "log_return": 866.0054633739899,
+        "revin": 784.8887928879909
+      },
+      "n_val_windows": 194
+    },
+    "lstm_global_h1": {
+      "model": "lstm",
+      "track": "global",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 74.28204605852972,
+        "log_return": 10.343477196883782,
+        "revin": 10.96232366171312
+      },
+      "n_val_windows": 915
+    },
+    "gru_global_h1": {
+      "model": "gru",
+      "track": "global",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 33.78057547814208,
+        "log_return": 10.1754564866855,
+        "revin": 10.864565533699427
+      },
+      "n_val_windows": 915
+    },
+    "tsmixer_global_h1": {
+      "model": "tsmixer",
+      "track": "global",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 14.588196134306694,
+        "log_return": 10.754357598041516,
+        "revin": 11.752163585792568
+      },
+      "n_val_windows": 915
+    },
+    "patchtst_global_h1": {
+      "model": "patchtst",
+      "track": "global",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 76.10461332394125,
+        "log_return": 10.813034952252522,
+        "revin": 23.524129235084757
+      },
+      "n_val_windows": 915
+    },
+    "tft_global_h1": {
+      "model": "tft",
+      "track": "global",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 131.87273269403175,
+        "log_return": 10.106451675925975,
+        "revin": 10.25299436791193
+      },
+      "n_val_windows": 915
+    },
+    "lstm_global_h7": {
+      "model": "lstm",
+      "track": "global",
+      "horizon": 7,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 89.7077280464514,
+        "log_return": 19.515794292138178,
+        "revin": 20.869816487090645
+      },
+      "n_val_windows": 909
+    },
+    "gru_global_h7": {
+      "model": "gru",
+      "track": "global",
+      "horizon": 7,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 52.29054923314596,
+        "log_return": 19.438219061978543,
+        "revin": 20.392936031404254
+      },
+      "n_val_windows": 909
+    },
+    "tsmixer_global_h7": {
+      "model": "tsmixer",
+      "track": "global",
+      "horizon": 7,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_mae": {
+        "minmax": 26.523695798709337,
+        "log_return": 23.780312255383908,
+        "revin": 23.46651438793777
+      },
+      "n_val_windows": 909
+    },
+    "patchtst_global_h7": {
+      "model": "patchtst",
+      "track": "global",
+      "horizon": 7,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 178.37575551988792,
+        "log_return": 24.323575826671608,
+        "revin": 34.0230403887708
+      },
+      "n_val_windows": 909
+    },
+    "tft_global_h7": {
+      "model": "tft",
+      "track": "global",
+      "horizon": 7,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 60.00596356545531,
+        "log_return": 19.83467304180695,
+        "revin": 20.23572832569271
+      },
+      "n_val_windows": 909
+    },
+    "lstm_global_h30": {
+      "model": "lstm",
+      "track": "global",
+      "horizon": 30,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 113.8999864381628,
+        "log_return": 36.10434759973949,
+        "revin": 38.78005514840776
+      },
+      "n_val_windows": 886
+    },
+    "gru_global_h30": {
+      "model": "gru",
+      "track": "global",
+      "horizon": 30,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 104.2607613660412,
+        "log_return": 37.02760398269287,
+        "revin": 38.3382142458322
+      },
+      "n_val_windows": 886
+    },
+    "tsmixer_global_h30": {
+      "model": "tsmixer",
+      "track": "global",
+      "horizon": 30,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 45.309798002565955,
+        "log_return": 44.43797843790371,
+        "revin": 48.4879404474891
+      },
+      "n_val_windows": 886
+    },
+    "patchtst_global_h30": {
+      "model": "patchtst",
+      "track": "global",
+      "horizon": 30,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_mae": {
+        "minmax": 126.08835724313246,
+        "log_return": 62.83075340477702,
+        "revin": 54.60304502167518
+      },
+      "n_val_windows": 886
+    },
+    "tft_global_h30": {
+      "model": "tft",
+      "track": "global",
+      "horizon": 30,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_mae": {
+        "minmax": 187.6694530432524,
+        "log_return": 36.935871609621614,
+        "revin": 41.36569640035725
+      },
+      "n_val_windows": 886
+    }
+  },
+  "missing_runs": []
+}

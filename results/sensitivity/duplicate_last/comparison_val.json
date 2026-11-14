@@ -1,0 +1,58 @@
+{
+  "rows": [
+    {
+      "model": "lstm",
+      "h": 1,
+      "val_mae_first": 13400.68574174958,
+      "val_mae_last": 13852.635192597394,
+      "rel_change": 0.0337258450468527,
+      "mape_change_pp": 2.1917982404058307,
+      "material": true
+    },
+    {
+      "model": "lstm",
+      "h": 7,
+      "val_mae_first": 14481.450485259627,
+      "val_mae_last": 14479.372517769709,
+      "rel_change": -0.00014349166832657492,
+      "mape_change_pp": -0.030276023326408108,
+      "material": false
+    },
+    {
+      "model": "lstm",
+      "h": 30,
+      "val_mae_first": 14526.132838592004,
+      "val_mae_last": 13887.312722662962,
+      "rel_change": -0.04397730098074484,
+      "mape_change_pp": -2.9870155805964487,
+      "material": true
+    },
+    {
+      "model": "gru",
+      "h": 1,
+      "val_mae_first": 11784.749189847253,
+      "val_mae_last": 11280.198119569786,
+      "rel_change": -0.04281389974019516,
+      "mape_change_pp": -2.466905105284738,
+      "material": true
+    },
+    {
+      "model": "gru",
+      "h": 7,
+      "val_mae_first": 11725.64674024852,
+      "val_mae_last": 11383.44595475539,
+      "rel_change": -0.02918395829873655,
+      "mape_change_pp": -1.7167487327321425,
+      "material": true
+    },
+    {
+      "model": "gru",
+      "h": 30,
+      "val_mae_first": 12534.878037495302,
+      "val_mae_last": 11740.225531656062,
+      "rel_change": -0.06339531214122814,
+      "mape_change_pp": -3.784837671889079,
+      "material": true
+    }
+  ]
+}

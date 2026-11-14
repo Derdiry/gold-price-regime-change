@@ -1,0 +1,41 @@
+# Python 3.10, CPU only. Versions are those of the environment that trained every model
+# (every saved Keras model records keras_version 3.12.1).
+#
+#   pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
+
+# Data and statistics
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.13.0
+scikit-learn==1.5.0
+statsmodels==0.14.2
+PyYAML==6.0.1
+openpyxl==3.1.5             # used by pandas.read_excel for the ACLED .xlsx files
+
+# Deep learning
+tensorflow==2.16.1
+keras==3.12.1
+
+# Chronos (zero-shot inference); transformers and accelerate are runtime
+# dependencies of chronos-forecasting, pinned to the versions used
+torch==2.3.0+cpu
+chronos-forecasting==1.4.0
+transformers==4.47.1
+accelerate==0.34.2
+
+# Data sources (global track)
+yfinance==1.2.0
+fredapi==0.5.2
+wbdata==0.3.0
+
+# Experiment tracking
+mlflow==2.16.0
+
+# Plots and notebooks
+matplotlib==3.10.8
+plotly==5.22.0
+nbconvert==7.17.0
+ipykernel==6.29.4
+
+# Tests
+pytest==8.2.2

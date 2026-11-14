@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata and the earlier paper listed under references."
+type: software
+title: "Gold price forecasting under regime change"
+authors:
+  - family-names: "Elbushra"
+    given-names: "Mohamed"
+license: Apache-2.0
+repository-code: "https://github.com/Derdiry/gold-price-regime-change"
+abstract: >-
+  Re-evaluation and extension of Wan & Elbushra (ICCNC 2024): deep forecasters (LSTM, GRU,
+  a hybrid TSMixer, PatchTST, TFT), validation-selected ensembles and zero-shot Chronos against
+  persistence for Sudanese and international gold prices, with Diebold–Mariano tests and
+  preregistered follow-up experiments.
+keywords:
+  - time-series-forecasting
+  - regime-change
+  - distribution-shift
+  - gold-price
+  - diebold-mariano
+references:
+  - type: conference-paper
+    title: "Forecasting Sudan Gold Prices with a Hybrid Deep Learning Approach"
+    authors:
+      - family-names: "Wan"
+        given-names: "Yan"
+      - family-names: "Elbushra"
+        given-names: "Mohamed"
+    collection-title: "2024 International Conference on Cloud and Network Computing (ICCNC)"
+    conference:
+      name: "2024 International Conference on Cloud and Network Computing (ICCNC)"
+    year: 2024
+    start: 71
+    end: 78
+    doi: "10.1109/ICCNC63989.2024.00020"

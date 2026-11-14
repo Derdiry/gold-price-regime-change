@@ -1,0 +1,59 @@
+{
+  "key": "ensemble_sudan_h30_revin_s1",
+  "protocol": "v2",
+  "model": "ensemble",
+  "track": "sudan",
+  "horizon": 30,
+  "condition": "revin",
+  "seed": 1,
+  "selection_rule": "top-2 by validation MAE",
+  "candidates_val_mae": {
+    "tft": 784.8887928879909,
+    "lstm": 792.5241807780427,
+    "gru": 878.7163243242162,
+    "patchtst": 1029.9139618316776,
+    "tsmixer": 1117.2474522537834
+  },
+  "selected": [
+    "tft",
+    "lstm"
+  ],
+  "weights": [
+    0.5521370574816531,
+    0.44786294251834696
+  ],
+  "val_mae": 772.7398770552559,
+  "optimiser": {
+    "method": "SLSQP",
+    "success": true,
+    "message": "Optimization terminated successfully"
+  },
+  "metrics": {
+    "val": {
+      "mae": 772.7398770583031,
+      "rmse": 1106.9374755902115,
+      "mape": 3.893569102349178,
+      "directional_accuracy": 14.784110535405873,
+      "directional_accuracy_nonzero": 53.36658354114713,
+      "directional_accuracy_max": 27.702936096718478,
+      "directional_accuracy_n_nonzero": 1604,
+      "da_origin": 53.264604810996566,
+      "da_origin_nonzero": 57.846613174099645,
+      "da_origin_max": 92.07903780068727,
+      "da_origin_n_nonzero": 5359,
+      "n_windows": 194,
+      "horizon": 30
+    },
+    "test": null
+  },
+  "member_records": [
+    "tft_sudan_h30_revin_s1",
+    "lstm_sudan_h30_revin_s1"
+  ],
+  "provenance": {
+    "git_commit": "8ab2c8a8ac752800deeaa836b17ec906df82e8c4",
+    "git_dirty": false,
+    "protocol": "v2"
+  },
+  "config_sha256": "c66e03169872ff4f923c54996e6177fad57d23b93f8b43a399e3c7b6ed2f07a1"
+}

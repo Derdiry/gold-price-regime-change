@@ -1,0 +1,59 @@
+{
+  "key": "ensemble_sudan_h30_log_return_s1",
+  "protocol": "v2",
+  "model": "ensemble",
+  "track": "sudan",
+  "horizon": 30,
+  "condition": "log_return",
+  "seed": 1,
+  "selection_rule": "top-2 by validation MAE",
+  "candidates_val_mae": {
+    "gru": 860.3220984793403,
+    "tft": 866.0054633739899,
+    "patchtst": 871.8981449290318,
+    "lstm": 893.2566019024196,
+    "tsmixer": 1904.4286223839667
+  },
+  "selected": [
+    "gru",
+    "tft"
+  ],
+  "weights": [
+    0.5741411732335953,
+    0.42585882676640485
+  ],
+  "val_mae": 853.8286736229566,
+  "optimiser": {
+    "method": "SLSQP",
+    "success": true,
+    "message": "Optimization terminated successfully"
+  },
+  "metrics": {
+    "val": {
+      "mae": 853.82867362633,
+      "rmse": 1171.6845566787858,
+      "mape": 4.229033987249599,
+      "directional_accuracy": 15.388601036269431,
+      "directional_accuracy_nonzero": 55.548628428927685,
+      "directional_accuracy_max": 27.702936096718478,
+      "directional_accuracy_n_nonzero": 1604,
+      "da_origin": 55.343642611683855,
+      "da_origin_nonzero": 60.10449710766934,
+      "da_origin_max": 92.07903780068727,
+      "da_origin_n_nonzero": 5359,
+      "n_windows": 194,
+      "horizon": 30
+    },
+    "test": null
+  },
+  "member_records": [
+    "gru_sudan_h30_log_return_s1",
+    "tft_sudan_h30_log_return_s1"
+  ],
+  "provenance": {
+    "git_commit": "8ab2c8a8ac752800deeaa836b17ec906df82e8c4",
+    "git_dirty": false,
+    "protocol": "v2"
+  },
+  "config_sha256": "efc316a850b231b2f12b1efa27fd66d20579581af6757c4f245dca6871a15f33"
+}

@@ -1,0 +1,73 @@
+{
+  "key": "ensemble_global_h30_minmax_s1",
+  "protocol": "v2",
+  "model": "ensemble",
+  "track": "global",
+  "horizon": 30,
+  "condition": "minmax",
+  "seed": 1,
+  "selection_rule": "top-2 by validation MAE",
+  "candidates_val_mae": {
+    "tsmixer": 45.309798002565955,
+    "gru": 104.2607613660412,
+    "lstm": 113.8999864381628,
+    "patchtst": 126.08835724313246,
+    "tft": 187.6694530432524
+  },
+  "selected": [
+    "tsmixer",
+    "gru"
+  ],
+  "weights": [
+    0.9864580542961973,
+    0.013541945703802771
+  ],
+  "val_mae": 45.29591058660866,
+  "optimiser": {
+    "method": "SLSQP",
+    "success": true,
+    "message": "Optimization terminated successfully"
+  },
+  "metrics": {
+    "val": {
+      "mae": 45.29591058639402,
+      "rmse": 62.508316478430075,
+      "mape": 2.934202607662829,
+      "directional_accuracy": 50.23352165725047,
+      "directional_accuracy_nonzero": 50.63401670463173,
+      "directional_accuracy_max": 99.2090395480226,
+      "directional_accuracy_n_nonzero": 26340,
+      "da_origin": 53.487584650112865,
+      "da_origin_nonzero": 53.55810887172725,
+      "da_origin_max": 99.86832204665161,
+      "da_origin_n_nonzero": 26545,
+      "n_windows": 886,
+      "horizon": 30
+    },
+    "test": {
+      "mae": 88.92195952564177,
+      "rmse": 120.65987377252661,
+      "mape": 4.250199645244616,
+      "directional_accuracy": 49.744456971063514,
+      "directional_accuracy_nonzero": 49.856873822975516,
+      "directional_accuracy_max": 99.77452085682074,
+      "directional_accuracy_n_nonzero": 26550,
+      "da_origin": 48.81006006006006,
+      "da_origin_nonzero": 48.8412275100477,
+      "da_origin_max": 99.93618618618618,
+      "da_origin_n_nonzero": 26623,
+      "n_windows": 888,
+      "horizon": 30
+    }
+  },
+  "member_records": [
+    "tsmixer_global_h30_minmax_s1",
+    "gru_global_h30_minmax_s1"
+  ],
+  "provenance": {
+    "git_commit": "6bb65f5ded6718bf36a4a4754679803e00ee24bf",
+    "git_dirty": true,
+    "protocol": "v2"
+  },
+  "config_sha256": "80e273a47d19daffc9be0d39c5decc92a709157a982ae97c000ddcdea8a3ed5a"
+}

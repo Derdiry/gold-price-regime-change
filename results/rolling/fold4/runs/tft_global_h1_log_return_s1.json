@@ -1,0 +1,325 @@
+{
+  "key": "tft_global_h1_log_return_s1",
+  "protocol": "v2",
+  "model": "tft",
+  "track": "global",
+  "horizon": 1,
+  "condition": "log_return",
+  "seed": 1,
+  "metrics": {
+    "val": {
+      "mae": 12.254081733239397,
+      "rmse": 16.986795222350665,
+      "mape": 0.6675606152697761,
+      "directional_accuracy": 46.71052631578947,
+      "directional_accuracy_nonzero": 46.864686468646866,
+      "directional_accuracy_max": 99.67105263157895,
+      "directional_accuracy_n_nonzero": 303,
+      "da_origin": 54.42622950819672,
+      "da_origin_nonzero": 54.60526315789473,
+      "da_origin_max": 99.672131147541,
+      "da_origin_n_nonzero": 304,
+      "n_windows": 305,
+      "horizon": 1
+    },
+    "test": {
+      "mae": 12.017830654648026,
+      "rmse": 16.035049079020904,
+      "mape": 0.6508687456395019,
+      "directional_accuracy": 51.47540983606558,
+      "directional_accuracy_nonzero": 51.64473684210527,
+      "directional_accuracy_max": 99.672131147541,
+      "directional_accuracy_n_nonzero": 304,
+      "da_origin": 50.65359477124183,
+      "da_origin_nonzero": 50.81967213114754,
+      "da_origin_max": 99.67320261437908,
+      "da_origin_n_nonzero": 305,
+      "n_windows": 306,
+      "horizon": 1
+    }
+  },
+  "selection_metric": "val_mae",
+  "n_params": {
+    "total": 42499,
+    "trainable": 42499,
+    "non_trainable": 0
+  },
+  "epochs_trained": 36,
+  "max_epochs": 100,
+  "early_stopping_patience": 10,
+  "stopped_early": true,
+  "sensitivity": null,
+  "variant": "rolling_fold4",
+  "target_col": "gold_close",
+  "best_epoch": 26,
+  "effective_batch_size": 8,
+  "train_seconds": 409.1,
+  "seconds_per_epoch": 11.36,
+  "n_features": 29,
+  "feature_cols": [
+    "gold_close",
+    "gold_open",
+    "gold_high",
+    "gold_low",
+    "gold_volume",
+    "gold_etf_close",
+    "usd_index_close",
+    "brent_crude_close",
+    "treasury_10y",
+    "cpi",
+    "m2",
+    "sma_20",
+    "sma_50",
+    "sma_200",
+    "ema_12",
+    "ema_26",
+    "rsi",
+    "macd",
+    "macd_signal",
+    "macd_hist",
+    "bb_upper",
+    "bb_lower",
+    "bb_width",
+    "bb_pct",
+    "atr",
+    "return_1d",
+    "return_5d",
+    "return_20d",
+    "rolling_vol"
+  ],
+  "windows": {
+    "train": 2691,
+    "val": 305,
+    "test": 306
+  },
+  "provenance": {
+    "git_commit": "d32b43ae663b91461422bdd1cf995984f94cb58b",
+    "git_dirty": false,
+    "protocol": "v2"
+  },
+  "config_sha256": "cefdf2e22c037a68928364967bd2f6e8d7d3c41e820a0c393bb9756e4140ec31",
+  "config": {
+    "data": {
+      "global": {
+        "tickers": {
+          "gold_futures": "GC=F",
+          "gold_etf": "GLD",
+          "usd_index": "UUP",
+          "brent_crude": "BNO"
+        },
+        "fred_series": {
+          "treasury_10y": "DGS10",
+          "cpi": "CPIAUCSL",
+          "m2": "M2SL"
+        },
+        "start_date": "2000-01-01",
+        "end_date": "2024-12-31"
+      },
+      "sudan": {
+        "raw_file": "data/raw/new_Data.csv",
+        "duplicate_date_rule": "first",
+        "max_ffill_gap_days": 30,
+        "world_bank": {
+          "country_code": "SDN",
+          "indicators": {
+            "cpi": "FP.CPI.TOTL.ZG",
+            "gdp": "NY.GDP.MKTP.CD",
+            "official_fx": "PA.NUS.FCRF"
+          }
+        },
+        "acled_file": "data/raw/sudan/acled_sudan.csv",
+        "regional_tickers": {
+          "egypt_etf": "EGPT"
+        },
+        "start_date": "2015-01-01",
+        "end_date": "2022-12-31"
+      },
+      "target_col": "price_sdg",
+      "global_target_col": "gold_close",
+      "date_col": "date"
+    },
+    "features": {
+      "technical": {
+        "sma_windows": [
+          20,
+          50,
+          200
+        ],
+        "ema_windows": [
+          12,
+          26
+        ],
+        "rsi_window": 14,
+        "macd_fast": 12,
+        "macd_slow": 26,
+        "macd_signal": 9,
+        "bollinger_window": 20,
+        "bollinger_std": 2,
+        "atr_window": 14
+      },
+      "lags": {
+        "return_lags": [
+          1,
+          5,
+          20
+        ],
+        "rolling_vol_window": 20
+      },
+      "sudan_specific": {
+        "regime_breakpoints": [
+          "2019-04-11",
+          "2021-10-25"
+        ],
+        "conflict_lag_windows": [
+          1,
+          2,
+          3
+        ],
+        "fx_premium_col": "fx_rate"
+      }
+    },
+    "split": {
+      "train_ratio": 0.7,
+      "val_ratio": 0.15,
+      "test_ratio": 0.15,
+      "shuffle": false,
+      "fold": 4
+    },
+    "sequence": {
+      "input_length": 60,
+      "horizons": [
+        1,
+        7,
+        30
+      ],
+      "default_horizon": 7
+    },
+    "walk_forward": {
+      "initial_train_ratio": 0.7,
+      "step_size": 30,
+      "min_train_size": 252
+    },
+    "models": {
+      "lstm": {
+        "units": 128,
+        "num_layers": 2,
+        "dropout": 0.2,
+        "recurrent_dropout": 0.0,
+        "dense_units": 64,
+        "activation": "relu"
+      },
+      "gru": {
+        "units": 128,
+        "num_layers": 2,
+        "dropout": 0.2,
+        "recurrent_dropout": 0.0,
+        "dense_units": 64,
+        "activation": "relu"
+      },
+      "tsmixer": {
+        "n_block": 4,
+        "ff_dim": 64,
+        "dropout": 0.2,
+        "norm_type": "L",
+        "activation": "relu"
+      },
+      "patchtst": {
+        "patch_len": 16,
+        "stride": 8,
+        "d_model": 32,
+        "n_heads": 2,
+        "num_encoder_layers": 2,
+        "d_ff": 64,
+        "dropout": 0.1,
+        "activation": "gelu"
+      },
+      "tft": {
+        "hidden_size": 16,
+        "lstm_layers": 1,
+        "num_attention_heads": 1,
+        "dropout": 0.1,
+        "hidden_continuous_size": 4
+      },
+      "chronos": {
+        "model_id": "amazon/chronos-t5-mini",
+        "fine_tune": false,
+        "fine_tune_epochs": 10,
+        "fine_tune_lr": 1e-05
+      },
+      "ensemble": {
+        "method": "weighted_avg",
+        "top_n": 2
+      }
+    },
+    "training": {
+      "batch_size": 8,
+      "max_epochs": 100,
+      "early_stopping_patience": 10,
+      "early_stopping_monitor": "val_mae",
+      "optimizer": "adam",
+      "learning_rate": 0.001,
+      "loss": "mae",
+      "metrics": [
+        "mae",
+        "mse"
+      ],
+      "batch_size_overrides": {
+        "patchtst": {
+          "global": 8,
+          "sudan": 4
+        },
+        "tft": {
+          "global": 8,
+          "sudan": 8
+        }
+      },
+      "min_free_memory_gb": 3.0,
+      "fine_tune": {
+        "freeze_layers": 1,
+        "learning_rate": 0.0001,
+        "max_epochs": 50,
+        "early_stopping_patience": 7
+      },
+      "mc_dropout": {
+        "enabled": true,
+        "n_samples": 100
+      }
+    },
+    "experiment": {
+      "condition": "log_return",
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "variant": "rolling_fold4"
+    },
+    "mlflow": {
+      "tracking_uri": "mlruns",
+      "protocol": "v2",
+      "experiment_global": "gold-global-v2-rolling",
+      "experiment_sudan": "gold-sudan-v2-rolling",
+      "registered_model_prefix": "gold-v2"
+    },
+    "evaluation": {
+      "metrics": [
+        "mae",
+        "rmse",
+        "mape",
+        "directional_accuracy"
+      ],
+      "drift_threshold": 1.5
+    },
+    "paths": {
+      "raw_data": "data/raw",
+      "processed_data": "logs/v2/rolling/fold4/processed",
+      "results": "results/rolling/fold4",
+      "runs": "logs/v2/rolling/fold4",
+      "features": "logs/v2/rolling/fold4/features",
+      "scalers": "logs/v2/rolling/fold4/scalers",
+      "models": "mlruns",
+      "logs": "logs"
+    }
+  },
+  "mlflow_run_id": "2775846429d647f090a72cc72b187f78"
+}

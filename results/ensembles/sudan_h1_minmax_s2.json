@@ -1,0 +1,73 @@
+{
+  "key": "ensemble_sudan_h1_minmax_s2",
+  "protocol": "v2",
+  "model": "ensemble",
+  "track": "sudan",
+  "horizon": 1,
+  "condition": "minmax",
+  "seed": 2,
+  "selection_rule": "top-2 by validation MAE",
+  "candidates_val_mae": {
+    "tsmixer": 1893.3352280689462,
+    "patchtst": 3222.0113202424327,
+    "gru": 11105.779450147142,
+    "lstm": 14513.05987466718,
+    "tft": 17479.488340369255
+  },
+  "selected": [
+    "tsmixer",
+    "patchtst"
+  ],
+  "weights": [
+    0.5681165195164242,
+    0.4318834804835759
+  ],
+  "val_mae": 1101.8930883454495,
+  "optimiser": {
+    "method": "SLSQP",
+    "success": true,
+    "message": "Optimization terminated successfully"
+  },
+  "metrics": {
+    "val": {
+      "mae": 1101.8930883436394,
+      "rmse": 1413.7629965553422,
+      "mape": 5.572428520124059,
+      "directional_accuracy": 13.963963963963963,
+      "directional_accuracy_nonzero": 50.81967213114754,
+      "directional_accuracy_max": 27.47747747747748,
+      "directional_accuracy_n_nonzero": 61,
+      "da_origin": 11.210762331838566,
+      "da_origin_nonzero": 40.98360655737705,
+      "da_origin_max": 27.3542600896861,
+      "da_origin_n_nonzero": 61,
+      "n_windows": 223,
+      "horizon": 1
+    },
+    "test": {
+      "mae": 976.8074769582554,
+      "rmse": 1755.4873079654608,
+      "mape": 3.5149569140658943,
+      "directional_accuracy": 10.550458715596331,
+      "directional_accuracy_nonzero": 50.0,
+      "directional_accuracy_max": 21.100917431192663,
+      "directional_accuracy_n_nonzero": 92,
+      "da_origin": 12.585812356979407,
+      "da_origin_nonzero": 59.13978494623656,
+      "da_origin_max": 21.28146453089245,
+      "da_origin_n_nonzero": 93,
+      "n_windows": 437,
+      "horizon": 1
+    }
+  },
+  "member_records": [
+    "tsmixer_sudan_h1_minmax_s2",
+    "patchtst_sudan_h1_minmax_s2"
+  ],
+  "provenance": {
+    "git_commit": "70be18d51785c536a70025b5d3447e3c23a06dcb",
+    "git_dirty": true,
+    "protocol": "v2"
+  },
+  "config_sha256": "80e273a47d19daffc9be0d39c5decc92a709157a982ae97c000ddcdea8a3ed5a"
+}

@@ -1,0 +1,59 @@
+{
+  "key": "ensemble_global_h30_revin_s1",
+  "protocol": "v2",
+  "model": "ensemble",
+  "track": "global",
+  "horizon": 30,
+  "condition": "revin",
+  "seed": 1,
+  "selection_rule": "top-2 by validation MAE",
+  "candidates_val_mae": {
+    "gru": 38.3382142458322,
+    "lstm": 38.78005514840776,
+    "tft": 41.36569640035725,
+    "tsmixer": 48.4879404474891,
+    "patchtst": 54.60304502167518
+  },
+  "selected": [
+    "gru",
+    "lstm"
+  ],
+  "weights": [
+    0.5412748733584639,
+    0.45872512664153603
+  ],
+  "val_mae": 37.33089004174534,
+  "optimiser": {
+    "method": "SLSQP",
+    "success": true,
+    "message": "Optimization terminated successfully"
+  },
+  "metrics": {
+    "val": {
+      "mae": 37.330890041752475,
+      "rmse": 53.062098957369386,
+      "mape": 2.428212684139764,
+      "directional_accuracy": 50.4105461393597,
+      "directional_accuracy_nonzero": 50.81245254365984,
+      "directional_accuracy_max": 99.2090395480226,
+      "directional_accuracy_n_nonzero": 26340,
+      "da_origin": 52.66365688487584,
+      "da_origin_nonzero": 52.73309474477303,
+      "da_origin_max": 99.86832204665161,
+      "da_origin_n_nonzero": 26545,
+      "n_windows": 886,
+      "horizon": 30
+    },
+    "test": null
+  },
+  "member_records": [
+    "gru_global_h30_revin_s1",
+    "lstm_global_h30_revin_s1"
+  ],
+  "provenance": {
+    "git_commit": "8ab2c8a8ac752800deeaa836b17ec906df82e8c4",
+    "git_dirty": false,
+    "protocol": "v2"
+  },
+  "config_sha256": "c66e03169872ff4f923c54996e6177fad57d23b93f8b43a399e3c7b6ed2f07a1"
+}

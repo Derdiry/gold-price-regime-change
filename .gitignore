@@ -1,0 +1,49 @@
+# Python / environments
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.ruff_cache/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Secrets
+.env
+*.env
+.env.*
+
+# Editor / tool settings
+.claude/
+CLAUDE.md
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Runtime state, tracking store, checkpoints, forecasts
+mlruns/
+logs/
+*.keras
+*.weights.h5
+*.h5
+*.npz
+*.npy
+*.pkl
+*.joblib
+
+# Data: nothing in data/raw except the description and the synthetic sample
+data/raw/*
+!data/raw/SUDAN_DATA.md
+!data/raw/new_Data_SYNTHETIC_sample.csv
+data/features/
+data/processed/sequences/
+data/processed/scalers/
+data/processed/global_merged.csv
+data/processed/sudan_merged.csv
+data/processed/v2/global_merged.csv
+data/processed/v2/sudan_merged.csv
+data/processed/v2/features/
+data/processed/v2/scalers/
+data/test_samples/

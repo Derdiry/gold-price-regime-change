@@ -1,0 +1,47 @@
+{
+  "inputs": {
+    "data/raw/global/gold_futures.csv": "e70024cde4434104ab311c7a3f3f37332968f24c4ea1ebc5ce3f7431c948b50e",
+    "data/raw/global/gold_etf.csv": "1457b5dfd586a1e350961e10352b5b6544b56c0ff7b112378852572fd8c00af9",
+    "data/raw/global/usd_index.csv": "2c56a50a40410e860985fce6631d6c5cd7146c334372403ec760900a5031b0d4",
+    "data/raw/global/brent_crude.csv": "cc1da0a8112a6368668bac5e90ef32b45af26d4ac94aea8b373346811968eca6",
+    "data/raw/global/fred_macro.csv": "0cd18abedf1caecda49363c17997c2e0e451ddad6b3f4c319a8867db417da78b"
+  },
+  "rows": 6105,
+  "date_range": [
+    "2000-08-30",
+    "2024-12-30"
+  ],
+  "columns": [
+    "gold_open",
+    "gold_high",
+    "gold_low",
+    "gold_close",
+    "gold_volume",
+    "gold_dividends",
+    "gold_stock splits",
+    "gold_etf_close",
+    "usd_index_close",
+    "brent_crude_close",
+    "treasury_10y",
+    "cpi",
+    "m2",
+    "sma_20",
+    "sma_50",
+    "sma_200",
+    "ema_12",
+    "ema_26",
+    "rsi",
+    "macd",
+    "macd_signal",
+    "macd_hist",
+    "bb_upper",
+    "bb_lower",
+    "bb_width",
+    "bb_pct",
+    "atr",
+    "return_1d",
+    "return_5d",
+    "return_20d",
+    "rolling_vol"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "key": "ensemble_sudan_h7_minmax_s2",
+  "protocol": "v2",
+  "model": "ensemble",
+  "track": "sudan",
+  "horizon": 7,
+  "condition": "minmax",
+  "seed": 2,
+  "selection_rule": "top-2 by validation MAE",
+  "candidates_val_mae": {
+    "tsmixer": 3930.160350083834,
+    "patchtst": 6657.614639051185,
+    "gru": 11251.27946917174,
+    "lstm": 13794.27668992244,
+    "tft": 16851.483155421945
+  },
+  "selected": [
+    "tsmixer",
+    "patchtst"
+  ],
+  "weights": [
+    1.0,
+    0.0
+  ],
+  "val_mae": 3930.1603500915717,
+  "optimiser": {
+    "method": "SLSQP",
+    "success": true,
+    "message": "Optimization terminated successfully"
+  },
+  "metrics": {
+    "val": {
+      "mae": 3930.160350083834,
+      "rmse": 4939.477695202651,
+      "mape": 19.288594280816106,
+      "directional_accuracy": 14.550264550264549,
+      "directional_accuracy_nonzero": 52.757793764988016,
+      "directional_accuracy_max": 27.579365079365083,
+      "directional_accuracy_n_nonzero": 417,
+      "da_origin": 28.505595786701775,
+      "da_origin_nonzero": 42.03883495145631,
+      "da_origin_max": 67.80776826859775,
+      "da_origin_n_nonzero": 1030,
+      "n_windows": 217,
+      "horizon": 7
+    },
+    "test": {
+      "mae": 4283.4145755432755,
+      "rmse": 5292.236038658615,
+      "mape": 16.403350494643227,
+      "directional_accuracy": 10.564784053156147,
+      "directional_accuracy_nonzero": 50.23696682464455,
+      "directional_accuracy_max": 21.029900332225914,
+      "directional_accuracy_n_nonzero": 633,
+      "da_origin": 26.218097447795824,
+      "da_origin_nonzero": 48.231707317073166,
+      "da_origin_max": 54.35863440503812,
+      "da_origin_n_nonzero": 1640,
+      "n_windows": 431,
+      "horizon": 7
+    }
+  },
+  "member_records": [
+    "tsmixer_sudan_h7_minmax_s2",
+    "patchtst_sudan_h7_minmax_s2"
+  ],
+  "provenance": {
+    "git_commit": "70be18d51785c536a70025b5d3447e3c23a06dcb",
+    "git_dirty": true,
+    "protocol": "v2"
+  },
+  "config_sha256": "80e273a47d19daffc9be0d39c5decc92a709157a982ae97c000ddcdea8a3ed5a"
+}

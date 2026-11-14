@@ -1,0 +1,240 @@
+# Gold Price Forecaster — Model & Pipeline Configuration
+
+# ─────────────────────────────────────────────
+# Data
+# ─────────────────────────────────────────────
+data:
+  # Global track
+  global:
+    tickers:
+      gold_futures: "GC=F"
+      gold_etf: "GLD"
+      usd_index: "UUP"       # USD index ETF (used instead of DX-Y.NYB)
+      brent_crude: "BNO"     # Brent crude ETF (used instead of BZ=F)
+    fred_series:
+      treasury_10y: "DGS10"
+      cpi: "CPIAUCSL"
+      m2: "M2SL"
+    # CPI and M2 are monthly; processors.clean_macro time-interpolates and back-fills them to daily
+    # values, so between releases a daily value depends on the next monthly value (look-ahead), and no
+    # publication lag is applied. Known limitation, not corrected (README, "Limitations").
+    start_date: "2000-01-01"
+    end_date: "2024-12-31"
+    # gold_etf (from 2004-11), usd_index (2007-03) and brent_crude (2010-06) start late.
+    # Decision (author, 2026-10-28): keep all 29 features and drop windows with undefined
+    # features (processors.row_validity) -> 1,775 train windows from 2010-08. v1 instead
+    # back-filled later prices into earlier rows (look-ahead within training).
+
+  # Sudan track
+  sudan:
+    raw_file: "data/raw/new_Data.csv"
+    # 635 dates carry 2-3 rows with different Price/FX values. Rule for keeping one:
+    # "first" (v1 behaviour), "last" or "median". See src/data/quality.py.
+    # Decision (author, 2026-10-28): keep "first", so v1 vs v2 differ only by protocol fixes.
+    duplicate_date_rule: "first"
+    # Raw gaps longer than this (days) are flagged in_long_gap; windows touching
+    # them are dropped. Only the 404-day gap 2019-11-25 -> 2021-01-02 exceeds 30.
+    max_ffill_gap_days: 30
+    world_bank:
+      country_code: "SDN"
+      indicators:
+        cpi: "FP.CPI.TOTL.ZG"
+        gdp: "NY.GDP.MKTP.CD"
+        official_fx: "PA.NUS.FCRF"
+    acled_file: "data/raw/sudan/acled_sudan.csv"   # download manually from acleddata.com
+    regional_tickers:
+      egypt_etf: "EGPT"                            # proxy; may need manual source
+    start_date: "2015-01-01"
+    end_date: "2022-12-31"
+
+  # Columns
+  target_col: "price_sdg"         # SDG per gram (Sudan track) — renamed from "Price" in fetcher
+  global_target_col: "gold_close" # international gold close — prefixed in merge_global_track()
+  date_col: "date"
+
+# ─────────────────────────────────────────────
+# Feature Engineering
+# ─────────────────────────────────────────────
+features:
+  technical:
+    sma_windows: [20, 50, 200]
+    ema_windows: [12, 26]
+    rsi_window: 14
+    macd_fast: 12
+    macd_slow: 26
+    macd_signal: 9
+    bollinger_window: 20
+    bollinger_std: 2
+    atr_window: 14
+
+  lags:
+    return_lags: [1, 5, 20]       # price return lags (days)
+    rolling_vol_window: 20        # rolling volatility window
+
+  sudan_specific:
+    regime_breakpoints:           # approximate dates of structural breaks
+      - "2019-04-11"              # Bashir ousted
+      - "2021-10-25"              # military coup
+    conflict_lag_windows: [1, 2, 3]  # months to lag ACLED data
+    fx_premium_col: "fx_rate"      # SDG/USD rate — renamed from "local USD" in fetcher
+
+# ─────────────────────────────────────────────
+# Dataset Splitting
+# ─────────────────────────────────────────────
+split:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  shuffle: false                  # NEVER shuffle time series
+
+# ─────────────────────────────────────────────
+# Sequence Construction
+# ─────────────────────────────────────────────
+sequence:
+  input_length: 60                # lookback window (days)
+  horizons: [1, 7, 30]           # prediction horizons to support
+  default_horizon: 7
+
+# ─────────────────────────────────────────────
+# Walk-Forward Validation
+# ─────────────────────────────────────────────
+walk_forward:
+  initial_train_ratio: 0.70      # size of first training window
+  step_size: 30                  # days to advance each fold
+  min_train_size: 252            # minimum 1 year of trading days
+
+# ─────────────────────────────────────────────
+# Model Hyperparameters
+# ─────────────────────────────────────────────
+models:
+  lstm:
+    units: 128
+    num_layers: 2
+    dropout: 0.2
+    recurrent_dropout: 0.0
+    dense_units: 64
+    activation: "relu"
+
+  gru:
+    units: 128
+    num_layers: 2
+    dropout: 0.2
+    recurrent_dropout: 0.0
+    dense_units: 64
+    activation: "relu"
+
+  tsmixer:
+    n_block: 4
+    ff_dim: 64
+    dropout: 0.2
+    norm_type: "L"               # L=LayerNorm, B=BatchNorm
+    activation: "relu"
+
+  patchtst:
+    patch_len: 16
+    stride: 8
+    d_model: 32          # reduced from 128 — 8GB RAM constraint
+    n_heads: 2           # reduced from 8
+    num_encoder_layers: 2  # reduced from 3
+    d_ff: 64             # reduced from 256
+    dropout: 0.1
+    activation: "gelu"
+
+  tft:
+    hidden_size: 16          # minimal — 8GB RAM, many features
+    lstm_layers: 1
+    num_attention_heads: 1
+    dropout: 0.1
+    hidden_continuous_size: 4
+
+  chronos:
+    model_id: "amazon/chronos-t5-mini"  # v1 setting; v2 ran chronos-t5-mini and chronos-t5-small (scripts/run_chronos.py)
+    fine_tune: false      # zero-shot only — fine-tune API differs per Chronos version
+    fine_tune_epochs: 10
+    fine_tune_lr: 1.0e-5
+
+  ensemble:
+    method: "weighted_avg"       # weighted_avg or stacking
+    top_n: 2                     # use top-N models by val MAE
+
+# ─────────────────────────────────────────────
+# Training
+# ─────────────────────────────────────────────
+training:
+  batch_size: 32
+  max_epochs: 100
+  early_stopping_patience: 10
+  early_stopping_monitor: "val_mae"
+  optimizer: "adam"
+  learning_rate: 1.0e-3
+  loss: "mae"
+  metrics: ["mae", "mse"]
+
+  # Per-model batch sizes for memory on an 8 GB CPU machine.
+  # (v1 logged batch_size=32 to MLflow for these models; v2 logs the effective value.)
+  # PatchTST: unchanged from v1.
+  # TFT: v1 used 2; v2 uses 8 in every condition (protocol choice D6, author
+  # decision 2026-10-28). Measured 1 epoch h=30: 57/52 s vs 70/66 s (Sudan/global),
+  # peak RSS 2.00/1.87 vs 1.91/1.79 GiB. See docs/implementation_notes.md.
+  batch_size_overrides:
+    patchtst: {global: 8, sudan: 4}
+    tft: {global: 8, sudan: 8}
+
+  # Refuse to start training a model if MemAvailable is below this (GiB).
+  min_free_memory_gb: 3.0
+
+  # Sudan fine-tuning (transfer learning from global weights)
+  fine_tune:
+    freeze_layers: 1             # freeze first N layers when fine-tuning
+    learning_rate: 1.0e-4        # 10x lower than base lr
+    max_epochs: 50
+    early_stopping_patience: 7
+
+  # MC Dropout inference (uncertainty)
+  mc_dropout:
+    enabled: true
+    n_samples: 100               # forward passes for uncertainty estimation
+
+# ─────────────────────────────────────────────
+# Experiment protocol (v2)
+# ─────────────────────────────────────────────
+experiment:
+  # Target/input transformation. v2 Phase 1 implements only the v1 setup
+  # (MinMax scaling fitted on train); Phase 3 adds log_return and revin.
+  condition: "minmax"
+  seeds: [1, 2, 3]
+
+# ─────────────────────────────────────────────
+# MLflow
+# ─────────────────────────────────────────────
+mlflow:
+  # Relative to the repository root (resolved in src/training/mlflow_utils.py).
+  tracking_uri: "mlruns"
+  # v2 = the fixed evaluation protocol. The v1 experiments (gold-global,
+  # gold-sudan) stay in the store for the record but are never reported.
+  protocol: "v2"
+  experiment_global: "gold-global-v2"
+  experiment_sudan: "gold-sudan-v2"
+  # v2 registry names (gold-v2-<model>-<track>) are separate from the v1 names.
+  registered_model_prefix: "gold-v2"
+  # Final model names: gold-lstm-global, gold-lstm-sudan, etc.
+
+# ─────────────────────────────────────────────
+# Evaluation
+# ─────────────────────────────────────────────
+evaluation:
+  metrics: ["mae", "rmse", "mape", "directional_accuracy"]
+  drift_threshold: 1.5           # alert if live MAE > 1.5x training MAE
+
+# ─────────────────────────────────────────────
+# Paths
+# ─────────────────────────────────────────────
+paths:
+  raw_data: "data/raw"
+  processed_data: "data/processed/v2"   # v1 files in data/processed/ are not used by v2
+  results: "results"                    # every reported v2 number is written under here
+  runs: "logs/v2"                       # checkpoints, done flags, predictions (gitignored)
+  features: "data/processed/v2/features"
+  scalers: "data/processed/v2/scalers"
+  models: "mlruns"
+  logs: "logs"

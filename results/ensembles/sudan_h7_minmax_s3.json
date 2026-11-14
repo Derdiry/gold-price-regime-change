@@ -1,0 +1,73 @@
+{
+  "key": "ensemble_sudan_h7_minmax_s3",
+  "protocol": "v2",
+  "model": "ensemble",
+  "track": "sudan",
+  "horizon": 7,
+  "condition": "minmax",
+  "seed": 3,
+  "selection_rule": "top-2 by validation MAE",
+  "candidates_val_mae": {
+    "tsmixer": 3757.15421426257,
+    "patchtst": 6385.0637494728235,
+    "gru": 11479.585551761027,
+    "lstm": 12916.008607122285,
+    "tft": 17708.17201483038
+  },
+  "selected": [
+    "tsmixer",
+    "patchtst"
+  ],
+  "weights": [
+    0.9570107697507545,
+    0.0429892302492454
+  ],
+  "val_mae": 3745.185442194818,
+  "optimiser": {
+    "method": "SLSQP",
+    "success": true,
+    "message": "Optimization terminated successfully"
+  },
+  "metrics": {
+    "val": {
+      "mae": 3745.185442185366,
+      "rmse": 4916.118615480994,
+      "mape": 18.512226274272614,
+      "directional_accuracy": 13.492063492063492,
+      "directional_accuracy_nonzero": 48.92086330935252,
+      "directional_accuracy_max": 27.579365079365083,
+      "directional_accuracy_n_nonzero": 417,
+      "da_origin": 30.74391046741277,
+      "da_origin_nonzero": 45.33980582524272,
+      "da_origin_max": 67.80776826859775,
+      "da_origin_n_nonzero": 1030,
+      "n_windows": 217,
+      "horizon": 7
+    },
+    "test": {
+      "mae": 3621.7760351094817,
+      "rmse": 4896.554766116348,
+      "mape": 13.70580037107233,
+      "directional_accuracy": 9.966777408637874,
+      "directional_accuracy_nonzero": 47.39336492890995,
+      "directional_accuracy_max": 21.029900332225914,
+      "directional_accuracy_n_nonzero": 633,
+      "da_origin": 25.91978786874379,
+      "da_origin_nonzero": 47.68292682926829,
+      "da_origin_max": 54.35863440503812,
+      "da_origin_n_nonzero": 1640,
+      "n_windows": 431,
+      "horizon": 7
+    }
+  },
+  "member_records": [
+    "tsmixer_sudan_h7_minmax_s3",
+    "patchtst_sudan_h7_minmax_s3"
+  ],
+  "provenance": {
+    "git_commit": "70be18d51785c536a70025b5d3447e3c23a06dcb",
+    "git_dirty": true,
+    "protocol": "v2"
+  },
+  "config_sha256": "80e273a47d19daffc9be0d39c5decc92a709157a982ae97c000ddcdea8a3ed5a"
+}

@@ -1,0 +1,283 @@
+{
+  "provenance": {
+    "git_commit": "6bb65f5ded6718bf36a4a4754679803e00ee24bf",
+    "git_dirty": true,
+    "protocol": "v2"
+  },
+  "config_sha256": "80e273a47d19daffc9be0d39c5decc92a709157a982ae97c000ddcdea8a3ed5a",
+  "split_info": {
+    "track": "global",
+    "horizon": 7,
+    "n_features": 29,
+    "condition": "minmax",
+    "train": {
+      "rows": 4273,
+      "row_range": [
+        "2000-08-30",
+        "2017-09-15"
+      ],
+      "invalid_rows": 2438,
+      "windows": 1769,
+      "windows_dropped": 2438,
+      "first_origin": "2010-08-25",
+      "last_origin": "2017-09-06",
+      "target_range": [
+        "2010-08-26",
+        "2017-09-15"
+      ]
+    },
+    "val": {
+      "rows": 915,
+      "row_range": [
+        "2017-09-18",
+        "2021-05-07"
+      ],
+      "invalid_rows": 0,
+      "windows": 909,
+      "windows_dropped": 0,
+      "first_origin": "2017-09-15",
+      "last_origin": "2021-04-28",
+      "target_range": [
+        "2017-09-18",
+        "2021-05-07"
+      ]
+    },
+    "test": {
+      "rows": 917,
+      "row_range": [
+        "2021-05-10",
+        "2024-12-30"
+      ],
+      "invalid_rows": 0,
+      "windows": 911,
+      "windows_dropped": 0,
+      "first_origin": "2021-05-07",
+      "last_origin": "2024-12-18",
+      "target_range": [
+        "2021-05-10",
+        "2024-12-30"
+      ]
+    }
+  },
+  "config": {
+    "data": {
+      "global": {
+        "tickers": {
+          "gold_futures": "GC=F",
+          "gold_etf": "GLD",
+          "usd_index": "UUP",
+          "brent_crude": "BNO"
+        },
+        "fred_series": {
+          "treasury_10y": "DGS10",
+          "cpi": "CPIAUCSL",
+          "m2": "M2SL"
+        },
+        "start_date": "2000-01-01",
+        "end_date": "2024-12-31"
+      },
+      "sudan": {
+        "raw_file": "data/raw/new_Data.csv",
+        "duplicate_date_rule": "first",
+        "max_ffill_gap_days": 30,
+        "world_bank": {
+          "country_code": "SDN",
+          "indicators": {
+            "cpi": "FP.CPI.TOTL.ZG",
+            "gdp": "NY.GDP.MKTP.CD",
+            "official_fx": "PA.NUS.FCRF"
+          }
+        },
+        "acled_file": "data/raw/sudan/acled_sudan.csv",
+        "regional_tickers": {
+          "egypt_etf": "EGPT"
+        },
+        "start_date": "2015-01-01",
+        "end_date": "2022-12-31"
+      },
+      "target_col": "price_sdg",
+      "global_target_col": "gold_close",
+      "date_col": "date"
+    },
+    "features": {
+      "technical": {
+        "sma_windows": [
+          20,
+          50,
+          200
+        ],
+        "ema_windows": [
+          12,
+          26
+        ],
+        "rsi_window": 14,
+        "macd_fast": 12,
+        "macd_slow": 26,
+        "macd_signal": 9,
+        "bollinger_window": 20,
+        "bollinger_std": 2,
+        "atr_window": 14
+      },
+      "lags": {
+        "return_lags": [
+          1,
+          5,
+          20
+        ],
+        "rolling_vol_window": 20
+      },
+      "sudan_specific": {
+        "regime_breakpoints": [
+          "2019-04-11",
+          "2021-10-25"
+        ],
+        "conflict_lag_windows": [
+          1,
+          2,
+          3
+        ],
+        "fx_premium_col": "fx_rate"
+      }
+    },
+    "split": {
+      "train_ratio": 0.7,
+      "val_ratio": 0.15,
+      "test_ratio": 0.15,
+      "shuffle": false
+    },
+    "sequence": {
+      "input_length": 60,
+      "horizons": [
+        1,
+        7,
+        30
+      ],
+      "default_horizon": 7
+    },
+    "walk_forward": {
+      "initial_train_ratio": 0.7,
+      "step_size": 30,
+      "min_train_size": 252
+    },
+    "models": {
+      "lstm": {
+        "units": 128,
+        "num_layers": 2,
+        "dropout": 0.2,
+        "recurrent_dropout": 0.0,
+        "dense_units": 64,
+        "activation": "relu"
+      },
+      "gru": {
+        "units": 128,
+        "num_layers": 2,
+        "dropout": 0.2,
+        "recurrent_dropout": 0.0,
+        "dense_units": 64,
+        "activation": "relu"
+      },
+      "tsmixer": {
+        "n_block": 4,
+        "ff_dim": 64,
+        "dropout": 0.2,
+        "norm_type": "L",
+        "activation": "relu"
+      },
+      "patchtst": {
+        "patch_len": 16,
+        "stride": 8,
+        "d_model": 32,
+        "n_heads": 2,
+        "num_encoder_layers": 2,
+        "d_ff": 64,
+        "dropout": 0.1,
+        "activation": "gelu"
+      },
+      "tft": {
+        "hidden_size": 16,
+        "lstm_layers": 1,
+        "num_attention_heads": 1,
+        "dropout": 0.1,
+        "hidden_continuous_size": 4
+      },
+      "chronos": {
+        "model_id": "amazon/chronos-t5-mini",
+        "fine_tune": false,
+        "fine_tune_epochs": 10,
+        "fine_tune_lr": 1e-05
+      },
+      "ensemble": {
+        "method": "weighted_avg",
+        "top_n": 2
+      }
+    },
+    "training": {
+      "batch_size": 32,
+      "max_epochs": 100,
+      "early_stopping_patience": 10,
+      "early_stopping_monitor": "val_mae",
+      "optimizer": "adam",
+      "learning_rate": 0.001,
+      "loss": "mae",
+      "metrics": [
+        "mae",
+        "mse"
+      ],
+      "batch_size_overrides": {
+        "patchtst": {
+          "global": 8,
+          "sudan": 4
+        },
+        "tft": {
+          "global": 8,
+          "sudan": 8
+        }
+      },
+      "min_free_memory_gb": 3.0,
+      "fine_tune": {
+        "freeze_layers": 1,
+        "learning_rate": 0.0001,
+        "max_epochs": 50,
+        "early_stopping_patience": 7
+      },
+      "mc_dropout": {
+        "enabled": true,
+        "n_samples": 100
+      }
+    },
+    "experiment": {
+      "condition": "minmax",
+      "seeds": [
+        1,
+        2,
+        3
+      ]
+    },
+    "mlflow": {
+      "tracking_uri": "mlruns",
+      "protocol": "v2",
+      "experiment_global": "gold-global-v2",
+      "experiment_sudan": "gold-sudan-v2",
+      "registered_model_prefix": "gold-v2"
+    },
+    "evaluation": {
+      "metrics": [
+        "mae",
+        "rmse",
+        "mape",
+        "directional_accuracy"
+      ],
+      "drift_threshold": 1.5
+    },
+    "paths": {
+      "raw_data": "data/raw",
+      "processed_data": "data/processed/v2",
+      "results": "results",
+      "runs": "logs/v2",
+      "features": "data/processed/v2/features",
+      "scalers": "data/processed/v2/scalers",
+      "models": "mlruns",
+      "logs": "logs"
+    }
+  }
+}

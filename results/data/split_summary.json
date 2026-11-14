@@ -1,0 +1,423 @@
+{
+  "provenance": {
+    "git_commit": "dbe203957e04ba222025cc30e0702a7441939ed8",
+    "git_dirty": false,
+    "protocol": "v2"
+  },
+  "splits": [
+    {
+      "track": "global",
+      "horizon": 1,
+      "split": "train",
+      "rows": 4273,
+      "row_range": [
+        "2000-08-30",
+        "2017-09-15"
+      ],
+      "invalid_rows": 2438,
+      "windows": 1775,
+      "windows_dropped": 2438,
+      "first_origin": "2010-08-25",
+      "last_origin": "2017-09-14",
+      "target_range": [
+        "2010-08-26",
+        "2017-09-15"
+      ],
+      "v1_windows": 4213
+    },
+    {
+      "track": "global",
+      "horizon": 1,
+      "split": "val",
+      "rows": 915,
+      "row_range": [
+        "2017-09-18",
+        "2021-05-07"
+      ],
+      "invalid_rows": 0,
+      "windows": 915,
+      "windows_dropped": 0,
+      "first_origin": "2017-09-15",
+      "last_origin": "2021-05-06",
+      "target_range": [
+        "2017-09-18",
+        "2021-05-07"
+      ],
+      "v1_windows": 915
+    },
+    {
+      "track": "global",
+      "horizon": 1,
+      "split": "test",
+      "rows": 917,
+      "row_range": [
+        "2021-05-10",
+        "2024-12-30"
+      ],
+      "invalid_rows": 0,
+      "windows": 917,
+      "windows_dropped": 0,
+      "first_origin": "2021-05-07",
+      "last_origin": "2024-12-27",
+      "target_range": [
+        "2021-05-10",
+        "2024-12-30"
+      ],
+      "v1_windows": 917
+    },
+    {
+      "track": "global",
+      "horizon": 7,
+      "split": "train",
+      "rows": 4273,
+      "row_range": [
+        "2000-08-30",
+        "2017-09-15"
+      ],
+      "invalid_rows": 2438,
+      "windows": 1769,
+      "windows_dropped": 2438,
+      "first_origin": "2010-08-25",
+      "last_origin": "2017-09-06",
+      "target_range": [
+        "2010-08-26",
+        "2017-09-15"
+      ],
+      "v1_windows": 4207
+    },
+    {
+      "track": "global",
+      "horizon": 7,
+      "split": "val",
+      "rows": 915,
+      "row_range": [
+        "2017-09-18",
+        "2021-05-07"
+      ],
+      "invalid_rows": 0,
+      "windows": 909,
+      "windows_dropped": 0,
+      "first_origin": "2017-09-15",
+      "last_origin": "2021-04-28",
+      "target_range": [
+        "2017-09-18",
+        "2021-05-07"
+      ],
+      "v1_windows": 909
+    },
+    {
+      "track": "global",
+      "horizon": 7,
+      "split": "test",
+      "rows": 917,
+      "row_range": [
+        "2021-05-10",
+        "2024-12-30"
+      ],
+      "invalid_rows": 0,
+      "windows": 911,
+      "windows_dropped": 0,
+      "first_origin": "2021-05-07",
+      "last_origin": "2024-12-18",
+      "target_range": [
+        "2021-05-10",
+        "2024-12-30"
+      ],
+      "v1_windows": 911
+    },
+    {
+      "track": "global",
+      "horizon": 30,
+      "split": "train",
+      "rows": 4273,
+      "row_range": [
+        "2000-08-30",
+        "2017-09-15"
+      ],
+      "invalid_rows": 2438,
+      "windows": 1746,
+      "windows_dropped": 2438,
+      "first_origin": "2010-08-25",
+      "last_origin": "2017-08-03",
+      "target_range": [
+        "2010-08-26",
+        "2017-09-15"
+      ],
+      "v1_windows": 4184
+    },
+    {
+      "track": "global",
+      "horizon": 30,
+      "split": "val",
+      "rows": 915,
+      "row_range": [
+        "2017-09-18",
+        "2021-05-07"
+      ],
+      "invalid_rows": 0,
+      "windows": 886,
+      "windows_dropped": 0,
+      "first_origin": "2017-09-15",
+      "last_origin": "2021-03-25",
+      "target_range": [
+        "2017-09-18",
+        "2021-05-07"
+      ],
+      "v1_windows": 886
+    },
+    {
+      "track": "global",
+      "horizon": 30,
+      "split": "test",
+      "rows": 917,
+      "row_range": [
+        "2021-05-10",
+        "2024-12-30"
+      ],
+      "invalid_rows": 0,
+      "windows": 888,
+      "windows_dropped": 0,
+      "first_origin": "2021-05-07",
+      "last_origin": "2024-11-14",
+      "target_range": [
+        "2021-05-10",
+        "2024-12-30"
+      ],
+      "v1_windows": 888
+    },
+    {
+      "track": "sudan",
+      "horizon": 1,
+      "split": "train",
+      "rows": 2035,
+      "row_range": [
+        "2015-01-06",
+        "2020-08-01"
+      ],
+      "invalid_rows": 270,
+      "windows": 1705,
+      "windows_dropped": 270,
+      "first_origin": "2015-03-26",
+      "last_origin": "2019-11-24",
+      "target_range": [
+        "2015-03-27",
+        "2019-11-25"
+      ],
+      "v1_windows": 1975,
+      "windows_with_features_near_gap": 0
+    },
+    {
+      "track": "sudan",
+      "horizon": 1,
+      "split": "val",
+      "rows": 436,
+      "row_range": [
+        "2020-08-02",
+        "2021-10-11"
+      ],
+      "invalid_rows": 153,
+      "windows": 223,
+      "windows_dropped": 213,
+      "first_origin": "2021-03-02",
+      "last_origin": "2021-10-10",
+      "target_range": [
+        "2021-03-03",
+        "2021-10-11"
+      ],
+      "v1_windows": 436,
+      "windows_with_features_near_gap": 200
+    },
+    {
+      "track": "sudan",
+      "horizon": 1,
+      "split": "test",
+      "rows": 437,
+      "row_range": [
+        "2021-10-12",
+        "2022-12-22"
+      ],
+      "invalid_rows": 0,
+      "windows": 437,
+      "windows_dropped": 0,
+      "first_origin": "2021-10-11",
+      "last_origin": "2022-12-21",
+      "target_range": [
+        "2021-10-12",
+        "2022-12-22"
+      ],
+      "v1_windows": 437,
+      "windows_with_features_near_gap": 0
+    },
+    {
+      "track": "sudan",
+      "horizon": 7,
+      "split": "train",
+      "rows": 2035,
+      "row_range": [
+        "2015-01-06",
+        "2020-08-01"
+      ],
+      "invalid_rows": 270,
+      "windows": 1699,
+      "windows_dropped": 270,
+      "first_origin": "2015-03-26",
+      "last_origin": "2019-11-18",
+      "target_range": [
+        "2015-03-27",
+        "2019-11-25"
+      ],
+      "v1_windows": 1969,
+      "windows_with_features_near_gap": 0
+    },
+    {
+      "track": "sudan",
+      "horizon": 7,
+      "split": "val",
+      "rows": 436,
+      "row_range": [
+        "2020-08-02",
+        "2021-10-11"
+      ],
+      "invalid_rows": 153,
+      "windows": 217,
+      "windows_dropped": 213,
+      "first_origin": "2021-03-02",
+      "last_origin": "2021-10-04",
+      "target_range": [
+        "2021-03-03",
+        "2021-10-11"
+      ],
+      "v1_windows": 430,
+      "windows_with_features_near_gap": 200
+    },
+    {
+      "track": "sudan",
+      "horizon": 7,
+      "split": "test",
+      "rows": 437,
+      "row_range": [
+        "2021-10-12",
+        "2022-12-22"
+      ],
+      "invalid_rows": 0,
+      "windows": 431,
+      "windows_dropped": 0,
+      "first_origin": "2021-10-11",
+      "last_origin": "2022-12-15",
+      "target_range": [
+        "2021-10-12",
+        "2022-12-22"
+      ],
+      "v1_windows": 431,
+      "windows_with_features_near_gap": 0
+    },
+    {
+      "track": "sudan",
+      "horizon": 30,
+      "split": "train",
+      "rows": 2035,
+      "row_range": [
+        "2015-01-06",
+        "2020-08-01"
+      ],
+      "invalid_rows": 270,
+      "windows": 1676,
+      "windows_dropped": 270,
+      "first_origin": "2015-03-26",
+      "last_origin": "2019-10-26",
+      "target_range": [
+        "2015-03-27",
+        "2019-11-25"
+      ],
+      "v1_windows": 1946,
+      "windows_with_features_near_gap": 0
+    },
+    {
+      "track": "sudan",
+      "horizon": 30,
+      "split": "val",
+      "rows": 436,
+      "row_range": [
+        "2020-08-02",
+        "2021-10-11"
+      ],
+      "invalid_rows": 153,
+      "windows": 194,
+      "windows_dropped": 213,
+      "first_origin": "2021-03-02",
+      "last_origin": "2021-09-11",
+      "target_range": [
+        "2021-03-03",
+        "2021-10-11"
+      ],
+      "v1_windows": 407,
+      "windows_with_features_near_gap": 194
+    },
+    {
+      "track": "sudan",
+      "horizon": 30,
+      "split": "test",
+      "rows": 437,
+      "row_range": [
+        "2021-10-12",
+        "2022-12-22"
+      ],
+      "invalid_rows": 0,
+      "windows": 408,
+      "windows_dropped": 0,
+      "first_origin": "2021-10-11",
+      "last_origin": "2022-11-22",
+      "target_range": [
+        "2021-10-12",
+        "2022-12-22"
+      ],
+      "v1_windows": 408,
+      "windows_with_features_near_gap": 0
+    }
+  ],
+  "quality": {
+    "sudan": {
+      "decimal_shift_fixes": [
+        {
+          "date": "2016-12-03",
+          "column": "open",
+          "old": 117472.0,
+          "new": 1174.72
+        }
+      ],
+      "duplicate_dates": {
+        "rule": "first",
+        "file_rows": 2528,
+        "unique_dates": 1425,
+        "dates_with_multiple_rows": 635,
+        "rows_dropped": 1103
+      },
+      "fill_flags": {
+        "daily_rows": 2908,
+        "observed_days": 1425,
+        "ffilled_days": 1483,
+        "max_gap_days": 30,
+        "long_gaps": [
+          {
+            "last_observed": "2019-11-25",
+            "next_observed": "2021-01-02",
+            "days": 404,
+            "flagged_days": 403
+          }
+        ]
+      }
+    }
+  },
+  "inputs": {
+    "global": {
+      "data/raw/global/gold_futures.csv": "e70024cde4434104ab311c7a3f3f37332968f24c4ea1ebc5ce3f7431c948b50e",
+      "data/raw/global/gold_etf.csv": "1457b5dfd586a1e350961e10352b5b6544b56c0ff7b112378852572fd8c00af9",
+      "data/raw/global/usd_index.csv": "2c56a50a40410e860985fce6631d6c5cd7146c334372403ec760900a5031b0d4",
+      "data/raw/global/brent_crude.csv": "cc1da0a8112a6368668bac5e90ef32b45af26d4ac94aea8b373346811968eca6",
+      "data/raw/global/fred_macro.csv": "0cd18abedf1caecda49363c17997c2e0e451ddad6b3f4c319a8867db417da78b"
+    },
+    "sudan": {
+      "data/raw/new_Data.csv": "14d6d75508467435f7cc6b11386343223b79de795cae3347db1c9b6f50039522"
+    }
+  }
+}

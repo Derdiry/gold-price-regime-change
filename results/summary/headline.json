@@ -1,0 +1,91 @@
+{
+  "alpha": 0.05,
+  "experiments": {
+    "phase3_main_split": {
+      "evidence": "results/final/test_table.md",
+      "seeds": 3,
+      "configurations": 72,
+      "beat_persistence_absolute": 0,
+      "beat_persistence_squared": 0,
+      "lowest_mean_mase": 0.966,
+      "lowest_mean_mase_configuration": "global_h30 ensemble|selected"
+    },
+    "statistical_baselines": {
+      "evidence": "results/final/test_table.md",
+      "seeds": 1,
+      "configurations": 21,
+      "beat_persistence_absolute": 0,
+      "beat_persistence_squared": 0,
+      "lowest_mean_mase": 0.995,
+      "lowest_mean_mase_configuration": "global_h7 ets"
+    },
+    "rolling_origin_pooled": {
+      "evidence": "results/rolling/rolling_table.md",
+      "seeds": 1,
+      "configurations": 36,
+      "beat_persistence_absolute": 0,
+      "beat_persistence_squared": 0,
+      "lowest_mean_mase": 0.998,
+      "lowest_mean_mase_configuration": "global_h1 tft"
+    },
+    "chronos_zero_shot": {
+      "evidence": "results/chronos/chronos_table.md",
+      "seeds": 3,
+      "configurations": 12,
+      "beat_persistence_absolute": 0,
+      "beat_persistence_squared": 0,
+      "lowest_mean_mase": 1.031,
+      "lowest_mean_mase_configuration": "sudan_h30 chronos-mini"
+    },
+    "fx_target": {
+      "evidence": "results/fx_target/fx_table.md",
+      "seeds": 3,
+      "configurations": 18,
+      "beat_persistence_absolute": 0,
+      "beat_persistence_squared": 0,
+      "lowest_mean_mase": 1.145,
+      "lowest_mean_mase_configuration": "sudan_h7 ensemble (FX route)"
+    },
+    "acled_main_split": {
+      "evidence": "results/acled/acled_table.md",
+      "seeds": 3,
+      "configurations": 18,
+      "beat_persistence_absolute": 0,
+      "beat_persistence_squared": 0,
+      "lowest_mean_mase": 1.115,
+      "lowest_mean_mase_configuration": "main lag3 tft h7 (with conflict)"
+    },
+    "acled_rolling_pooled": {
+      "evidence": "results/acled/acled_table.md",
+      "seeds": 1,
+      "configurations": 6,
+      "beat_persistence_absolute": 0,
+      "beat_persistence_squared": 0,
+      "lowest_mean_mase": 1.088,
+      "lowest_mean_mase_configuration": "rolling lag2 tft h7 (with conflict)"
+    },
+    "regime_dummies": {
+      "evidence": "results/regime/regime_table.md",
+      "seeds": 3,
+      "configurations": 36,
+      "beat_persistence_absolute": 0,
+      "beat_persistence_squared": 0,
+      "lowest_mean_mase": 1.032,
+      "lowest_mean_mase_configuration": "fold5 tft h1 (without regime dummies)"
+    },
+    "transfer": {
+      "evidence": "results/transfer/transfer_table.md",
+      "seeds": 3,
+      "configurations": 12,
+      "beat_persistence_absolute": 0,
+      "beat_persistence_squared": 0,
+      "lowest_mean_mase": 1.085,
+      "lowest_mean_mase_configuration": "gru h30 (transfer)"
+    }
+  },
+  "total": {
+    "configurations": 231,
+    "beat_persistence_absolute": 0,
+    "beat_persistence_squared": 0
+  }
+}

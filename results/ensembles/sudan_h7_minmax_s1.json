@@ -1,0 +1,73 @@
+{
+  "key": "ensemble_sudan_h7_minmax_s1",
+  "protocol": "v2",
+  "model": "ensemble",
+  "track": "sudan",
+  "horizon": 7,
+  "condition": "minmax",
+  "seed": 1,
+  "selection_rule": "top-2 by validation MAE",
+  "candidates_val_mae": {
+    "tsmixer": 4378.218653565256,
+    "patchtst": 7621.705046622984,
+    "gru": 11725.64674024852,
+    "lstm": 14481.450485259627,
+    "tft": 16788.719081253344
+  },
+  "selected": [
+    "tsmixer",
+    "patchtst"
+  ],
+  "weights": [
+    1.0,
+    0.0
+  ],
+  "val_mae": 4378.218653571795,
+  "optimiser": {
+    "method": "SLSQP",
+    "success": true,
+    "message": "Optimization terminated successfully"
+  },
+  "metrics": {
+    "val": {
+      "mae": 4378.218653565256,
+      "rmse": 5259.026077653005,
+      "mape": 21.546734940854847,
+      "directional_accuracy": 14.153439153439153,
+      "directional_accuracy_nonzero": 51.3189448441247,
+      "directional_accuracy_max": 27.579365079365083,
+      "directional_accuracy_n_nonzero": 417,
+      "da_origin": 28.373930217248187,
+      "da_origin_nonzero": 41.84466019417476,
+      "da_origin_max": 67.80776826859775,
+      "da_origin_n_nonzero": 1030,
+      "n_windows": 217,
+      "horizon": 7
+    },
+    "test": {
+      "mae": 4253.1291648756005,
+      "rmse": 5060.014445388987,
+      "mape": 16.27165286546162,
+      "directional_accuracy": 11.162790697674419,
+      "directional_accuracy_nonzero": 53.08056872037915,
+      "directional_accuracy_max": 21.029900332225914,
+      "directional_accuracy_n_nonzero": 633,
+      "da_origin": 26.35067948293006,
+      "da_origin_nonzero": 48.47560975609756,
+      "da_origin_max": 54.35863440503812,
+      "da_origin_n_nonzero": 1640,
+      "n_windows": 431,
+      "horizon": 7
+    }
+  },
+  "member_records": [
+    "tsmixer_sudan_h7_minmax_s1",
+    "patchtst_sudan_h7_minmax_s1"
+  ],
+  "provenance": {
+    "git_commit": "6bb65f5ded6718bf36a4a4754679803e00ee24bf",
+    "git_dirty": true,
+    "protocol": "v2"
+  },
+  "config_sha256": "80e273a47d19daffc9be0d39c5decc92a709157a982ae97c000ddcdea8a3ed5a"
+}

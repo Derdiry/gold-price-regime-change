@@ -1,0 +1,23 @@
+Gold price forecasting under regime change
+Copyright 2026 Mohamed Elbushra
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This product includes software developed by The Google Research Authors:
+
+  TSMixer (https://github.com/google-research/google-research/tree/master/tsmixer)
+  Copyright 2023 The Google Research Authors.
+  Licensed under the Apache License, Version 2.0.
+
+Modified files:
+  - reference/tsmixer_paper_original.py: Google Research's TSMixer implementation,
+    modified by Mohamed Elbushra for the hybrid model of Wan & Elbushra (ICCNC 2024):
+    LSTM, Conv1D and MaxPooling1D layers added to the residual block.
+  - src/models/tsmixer.py: derived from reference/tsmixer_paper_original.py by
+    Mohamed Elbushra (Keras 3 port, single-target output, config-based builder).
+
+Data:
+  - The Sudan gold price data are not included and are not covered by this licence.
+    data/raw/new_Data_SYNTHETIC_sample.csv contains synthetic values only.
+  - Yahoo Finance, FRED and ACLED data are not redistributed. Results derived from
+    ACLED data (results/acled/) are aggregate statistics only.

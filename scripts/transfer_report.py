@@ -1,0 +1,127 @@
+"""
+Phase 4.5 report: global -> Sudan transfer vs Sudan from scratch, same 18
+shared inputs, log_return, GRU and PatchTST, seeds 1-3.
+
+Rules: results/transfer/PREREGISTRATION.md (must be committed).
+Outputs: results/transfer/{transfer_results.json, transfer_table.md, dm_tests.csv}
+
+    python scripts/transfer_report.py
+"""
+
+import json
+import sys
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from paired_common import (HORIZONS, LOSSES, ROOT, SEEDS, add_holm, baseline, load_run, ms, paired,  # noqa: E402
+                           pfmt, require_committed, score, verdict)
+
+sys.path.insert(0, str(ROOT))
+from src.data.features import shared_feature_cols  # noqa: E402
+from src.data.fetchers import load_config  # noqa: E402
+from src.utils.provenance import provenance  # noqa: E402
+
+MODELS, COND = ["gru", "patchtst"], "log_return"
+OUT = ROOT / "results/transfer"
+PREREG = OUT / "PREREGISTRATION.md"
+WORDS = ("transfer helps", "transfer hurts")
+
+
+def fz(n):
+    return f"{n['non_trainable']:,} of {n['total']:,} ({100 * n['non_trainable'] / n['total']:.1f}%)"
+
+
+def main():
+    prereg_commit = require_committed(PREREG)
+    cfg = load_config(str(ROOT / "configs/model_config.yaml"))
+    sel = json.loads((ROOT / "results/selection/selection.json").read_text())["selection"]
+    inputs = shared_feature_cols(cfg["data"]["target_col"])
+    ref_by_h = {h: baseline(ROOT / "logs/v2/preds", h) for h in HORIZONS}
+    cells = {}
+    for m in MODELS:
+        for h in HORIZONS:
+            ref, seeds = ref_by_h[h], []
+            pc = sel[f"{m}_sudan_h{h}"]["condition"]
+            for s in SEEDS:
+                key = f"{m}_sudan_h{h}_{COND}_s{s}"
+                ft = load_run(OUT / "finetune/runs", ROOT / "logs/v2/transfer/finetune/preds", key, ref)
+                sc_ = load_run(OUT / "scratch/runs", ROOT / "logs/v2/transfer/scratch/preds", key, ref)
+                for r in (ft, sc_):
+                    assert r["rec"]["feature_cols"] == inputs, f"{key}: inputs are not the 18 shared inputs"
+                tr = ft["rec"]["transfer"]
+                assert tr and tr["source_key"] == f"{m}_global_h{h}_{COND}_s{s}", key
+                pre = json.loads((OUT / "pretrain/runs" / f"{tr['source_key']}.json").read_text())
+                p3 = json.loads((ROOT / f"results/runs/{m}_sudan_h{h}_{pc}_s{s}.json").read_text())
+                seeds.append({"transfer": score(ref, ft["f"], h), "scratch": score(ref, sc_["f"], h),
+                              "transfer_vs_scratch": paired(ref, ft["f"], sc_["f"], h),
+                              "frozen_layer": tr["frozen_layer"], "n_params_finetune": ft["rec"]["n_params"],
+                              "epochs_finetune": ft["rec"]["epochs_trained"],
+                              "epochs_scratch": sc_["rec"]["epochs_trained"],
+                              "pretrain": {"val_mae": pre["metrics"]["val"]["mae"], "test_mae": pre["metrics"]["test"]["mae"],
+                                           "epochs": pre["epochs_trained"], "train_windows": pre["windows"]["train"]},
+                              "phase3_full_inputs": {"condition": pc, "test_mae": p3["metrics"]["test"]["mae"]}})
+            cells[(m, h)] = {"model": m, "h": h, "seeds": seeds}
+    for loss in LOSSES:
+        add_holm([sc["transfer_vs_scratch"][loss] for c in cells.values() for sc in c["seeds"]])
+    for c in cells.values():
+        for loss in LOSSES:
+            dms = [sc["transfer_vs_scratch"][loss] for sc in c["seeds"]]
+            c[f"verdict_{loss}"], c[f"verdict_{loss}_holm"] = verdict(dms, "p_value", WORDS), verdict(dms, "p_holm", WORDS)
+            for v in ("transfer", "scratch"):
+                c[f"{v}_vs_persistence_{loss}"] = verdict([sc[v]["vs_persistence"][loss] for sc in c["seeds"]], "p_value",
+                                                          ("beats persistence", "worse"))
+    summary = {f"{loss}{suf}": {w: sum(c[f"verdict_{loss}{suf}"] == w for c in cells.values())
+                                for w in (*WORDS, "no consistent difference")}
+               for loss in LOSSES for suf in ("", "_holm")}
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "transfer_results.json").write_text(json.dumps(
+        {"provenance": provenance(cfg), "preregistration_commit": prereg_commit, "preregistration_text": PREREG.read_text(),
+         "inputs": inputs, "summary": summary, "cells": list(cells.values())}, indent=2, default=float))
+    rows = [{"model": c["model"], "h": c["h"], "seed": s, "loss": loss, **{k: sc["transfer_vs_scratch"][loss][k]
+                                                                         for k in ("dm_hln", "p_value", "p_holm", "n")}}
+            for c in cells.values() for s, sc in zip(SEEDS, c["seeds"]) for loss in LOSSES]
+    pd.DataFrame(rows).to_csv(OUT / "dm_tests.csv", index=False)
+
+    L = ["# Global → Sudan transfer vs from scratch (generated by scripts/transfer_report.py)", "",
+         f"Rules fixed in `results/transfer/PREREGISTRATION.md` (commit `{prereg_commit[:7]}`) before training. Same 18 "
+         "shared inputs and log_return for pretraining, fine-tuning and from scratch; Phase 3 Sudan test windows; seeds 1–3 "
+         "paired. DM of transfer vs scratch (HLN, Newey–West lag h − 1); p per seed with sign (− = transfer has lower loss). "
+         "Verdict needs the sign to agree and p < 0.05 in all three seeds; Holm over the 18 seed-level tests.", "",
+         "**Summary (6 cells: help / hurt / no consistent difference):** "
+         + "; ".join(f"{k} {' / '.join(str(v[w]) for w in (*WORDS, 'no consistent difference'))}" for k, v in summary.items()), "",
+         "| model | h | MAE transfer | MAE scratch | MASE transfer | MASE scratch | DM p abs (s1/s2/s3) | verdict abs / Holm | "
+         "DM p sq | verdict sq / Holm | vs persistence abs: transfer / scratch | MAE ratio transfer / Phase 3 full inputs |",
+         "|---|---:|---:|---:|---:|---:|---|---|---|---|---|---:|"]
+    for c in cells.values():
+        g = lambda v, k: [sc[v][k] for sc in c["seeds"]]  # noqa: E731
+        d = lambda loss: [sc["transfer_vs_scratch"][loss] for sc in c["seeds"]]  # noqa: E731
+        ratio = [sc["transfer"]["mae"] / sc["phase3_full_inputs"]["test_mae"] for sc in c["seeds"]]
+        L.append(f"| {c['model']} | {c['h']} | {ms(g('transfer', 'mae'))} | {ms(g('scratch', 'mae'))} | "
+                 f"{ms(g('transfer', 'mase'), '{:.3f}')} | {ms(g('scratch', 'mase'), '{:.3f}')} | {pfmt(d('absolute'))} | "
+                 f"{c['verdict_absolute']} / {c['verdict_absolute_holm']} | {pfmt(d('squared'))} | "
+                 f"{c['verdict_squared']} / {c['verdict_squared_holm']} | {c['transfer_vs_persistence_absolute']} / "
+                 f"{c['scratch_vs_persistence_absolute']} | {ms(ratio, '{:.3f}')} |")
+    L += ["", "## Pretraining (global, 18 shared inputs, log_return) and fine-tuning", "",
+          "| model | h | global val MAE | global test MAE | pretrain epochs | fine-tune epochs | scratch epochs | frozen layer | "
+          "frozen weights (of total) |", "|---|---:|---:|---:|---|---|---|---|---:|"]
+    for c in cells.values():
+        p = [sc["pretrain"] for sc in c["seeds"]]
+        L.append(f"| {c['model']} | {c['h']} | {ms([x['val_mae'] for x in p])} | {ms([x['test_mae'] for x in p])} | "
+                 f"{'/'.join(str(x['epochs']) for x in p)} | {'/'.join(str(sc['epochs_finetune']) for sc in c['seeds'])} | "
+                 f"{'/'.join(str(sc['epochs_scratch']) for sc in c['seeds'])} | {c['seeds'][0]['frozen_layer']} | "
+                 f"{fz(c['seeds'][0]['n_params_finetune'])} |")
+    L += ["", "Frozen weights = non-trainable parameters of the seed-1 fine-tuned model. Freezing the first layer with "
+          "weights freezes a large share of GRU (partial freezing) but a small share of PatchTST, which is close to full "
+          "fine-tuning from a global initialisation: the two are different kinds of transfer (descriptive; verdicts unchanged).",
+          "", f"Global pretraining windows: {', '.join(str(sc['pretrain']['train_windows']) for c in cells.values() for sc in c['seeds'][:1])} "
+          "(per model and h, seed 1)."]
+    (OUT / "transfer_table.md").write_text("\n".join(L) + "\n")
+    print("\n".join(L))
+    assert np.isfinite([sc["transfer"]["mae"] for c in cells.values() for sc in c["seeds"]]).all()
+
+
+if __name__ == "__main__":
+    main()

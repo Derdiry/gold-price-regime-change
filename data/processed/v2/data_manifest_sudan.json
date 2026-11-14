@@ -1,0 +1,80 @@
+{
+  "inputs": {
+    "data/raw/new_Data.csv": "14d6d75508467435f7cc6b11386343223b79de795cae3347db1c9b6f50039522"
+  },
+  "quality": {
+    "decimal_shift_fixes": [
+      {
+        "date": "2016-12-03",
+        "column": "open",
+        "old": 117472.0,
+        "new": 1174.72
+      }
+    ],
+    "duplicate_dates": {
+      "rule": "first",
+      "file_rows": 2528,
+      "unique_dates": 1425,
+      "dates_with_multiple_rows": 635,
+      "rows_dropped": 1103
+    },
+    "fill_flags": {
+      "daily_rows": 2908,
+      "observed_days": 1425,
+      "ffilled_days": 1483,
+      "max_gap_days": 30,
+      "long_gaps": [
+        {
+          "last_observed": "2019-11-25",
+          "next_observed": "2021-01-02",
+          "days": 404,
+          "flagged_days": 403
+        }
+      ]
+    }
+  },
+  "rows": 2908,
+  "date_range": [
+    "2015-01-06",
+    "2022-12-22"
+  ],
+  "columns": [
+    "price_sdg",
+    "intl_price_usd",
+    "price_per_gram_21k",
+    "fx_rate",
+    "open",
+    "high",
+    "low",
+    "volume",
+    "is_ffilled",
+    "in_long_gap",
+    "fx_premium",
+    "fx_rate_log",
+    "fx_rate_change",
+    "parity_price",
+    "local_intl_spread",
+    "regime_1",
+    "regime_2",
+    "price_usd_gram",
+    "sudan_intl_ratio",
+    "sma_20",
+    "sma_50",
+    "sma_200",
+    "ema_12",
+    "ema_26",
+    "rsi",
+    "macd",
+    "macd_signal",
+    "macd_hist",
+    "bb_upper",
+    "bb_lower",
+    "bb_width",
+    "bb_pct",
+    "atr",
+    "return_1d",
+    "return_5d",
+    "return_20d",
+    "rolling_vol"
+  ]
+}

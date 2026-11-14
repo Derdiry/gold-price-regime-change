@@ -1,0 +1,205 @@
+{
+  "rule": "lowest validation MAE of the rebuilt price; 1% tie -> minmax < log_return < revin; seed 1",
+  "provenance": {
+    "git_commit": "d32b43ae663b91461422bdd1cf995984f94cb58b",
+    "git_dirty": false,
+    "protocol": "v2"
+  },
+  "selection": {
+    "lstm_h1": {
+      "model": "lstm",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_price_mae": {
+        "minmax": 12324.424761960621,
+        "log_return": 107.25216956599624,
+        "revin": 193.1749281452223
+      }
+    },
+    "gru_h1": {
+      "model": "gru",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_price_mae": {
+        "minmax": 9713.718723731521,
+        "log_return": 120.49110585383721,
+        "revin": 184.00068968641992
+      }
+    },
+    "tsmixer_h1": {
+      "model": "tsmixer",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_price_mae": {
+        "minmax": 2324.393054017061,
+        "log_return": 283.5598472049951,
+        "revin": 294.5240525161157
+      }
+    },
+    "patchtst_h1": {
+      "model": "patchtst",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_price_mae": {
+        "minmax": 507.10289357645775,
+        "log_return": 149.25366148315547,
+        "revin": 945.5931123401346
+      }
+    },
+    "tft_h1": {
+      "model": "tft",
+      "horizon": 1,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_price_mae": {
+        "minmax": 16638.336913972813,
+        "log_return": 104.69173558828614,
+        "revin": 117.59057993664605
+      }
+    },
+    "lstm_h7": {
+      "model": "lstm",
+      "horizon": 7,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_price_mae": {
+        "minmax": 12480.841078779227,
+        "log_return": 307.8900046312669,
+        "revin": 421.199500482078
+      }
+    },
+    "gru_h7": {
+      "model": "gru",
+      "horizon": 7,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_price_mae": {
+        "minmax": 9343.940417591246,
+        "log_return": 327.70943384972617,
+        "revin": 368.8955606534253
+      }
+    },
+    "tsmixer_h7": {
+      "model": "tsmixer",
+      "horizon": 7,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_price_mae": {
+        "minmax": 4534.828766219635,
+        "log_return": 649.4459741239757,
+        "revin": 501.37543949207316
+      }
+    },
+    "patchtst_h7": {
+      "model": "patchtst",
+      "horizon": 7,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_price_mae": {
+        "minmax": 3454.7830243991734,
+        "log_return": 413.72477851427004,
+        "revin": 1094.759520739034
+      }
+    },
+    "tft_h7": {
+      "model": "tft",
+      "horizon": 7,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_price_mae": {
+        "minmax": 16234.890059187494,
+        "log_return": 296.9274708986407,
+        "revin": 313.64022993972037
+      }
+    },
+    "lstm_h30": {
+      "model": "lstm",
+      "horizon": 30,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_price_mae": {
+        "minmax": 13571.108374799183,
+        "log_return": 886.3052014365256,
+        "revin": 876.8576691491213
+      }
+    },
+    "gru_h30": {
+      "model": "gru",
+      "horizon": 30,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_price_mae": {
+        "minmax": 10254.175242599378,
+        "log_return": 1014.2376340682347,
+        "revin": 975.8121118692204
+      }
+    },
+    "tsmixer_h30": {
+      "model": "tsmixer",
+      "horizon": 30,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_price_mae": {
+        "minmax": 3891.8153558407043,
+        "log_return": 2025.2588115113936,
+        "revin": 1182.7277539228542
+      }
+    },
+    "patchtst_h30": {
+      "model": "patchtst",
+      "horizon": 30,
+      "condition": "log_return",
+      "tied_within_1pct": [
+        "log_return"
+      ],
+      "val_price_mae": {
+        "minmax": 6365.890387147597,
+        "log_return": 982.6195304367211,
+        "revin": 1253.8039981391523
+      }
+    },
+    "tft_h30": {
+      "model": "tft",
+      "horizon": 30,
+      "condition": "revin",
+      "tied_within_1pct": [
+        "revin"
+      ],
+      "val_price_mae": {
+        "minmax": 16991.7250025035,
+        "log_return": 820.7851294487721,
+        "revin": 730.0886434110765
+      }
+    }
+  }
+}
