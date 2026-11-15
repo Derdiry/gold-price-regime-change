@@ -22,7 +22,7 @@ Design decisions, data handling and run provenance, each with its evidence. The 
 
 ## Data provenance
 
-- `data/raw/new_Data.csv` (the ICCNC 2024 paper's dataset): official reference prices for Sudanese 21-karat gold (2015–2022), obtained by the author; not redistributable; available on request for research purposes. The Sudan series tracks the official SDG/USD exchange rate closely (R² of log price on log exchange rate = 0.9976, a fit of two trending series), so forecasting it largely means forecasting the official exchange rate (OLS on the 1425 observed rows, `results/summary/facts.md`); the `local USD` column (`fx_rate`) is the official rate.
+- `data/raw/new_Data.csv` (the ICCNC 2024 paper's dataset): official reference prices for Sudanese 21-karat gold (2015–2022), obtained by the author; not redistributable; available on request for research purposes. The Sudan series tracks the official SDG/USD exchange rate closely (R² of log price on log exchange rate = 0.9976, OLS on the 1425 observed rows, a fit of two trending series), so forecasting it largely means forecasting the official exchange rate (`results/summary/facts.md`); the `local USD` column (`fx_rate`) is the official rate.
 - The full Sudan file is not included in this repository. `data/raw/SUDAN_DATA.md` describes it, and `data/raw/new_Data_SYNTHETIC_sample.csv` (written by `scripts/make_synthetic_sample.py`) shows its column schema with synthetic values only.
 
 ## Known limitations

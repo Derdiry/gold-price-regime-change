@@ -10,7 +10,7 @@ Official reference prices for Sudanese 21-karat gold (2015–2022), obtained by 
 
 ## What the series is
 
-The Sudan series is an official reference price. The Sudan series tracks the official SDG/USD exchange rate closely (R² of log price on log exchange rate = 0.9976, a fit of two trending series), so forecasting it largely means forecasting the official exchange rate (OLS on the 1425 observed rows; `results/summary/facts.md`).
+The Sudan series is an official reference price. The Sudan series tracks the official SDG/USD exchange rate closely (R² of log price on log exchange rate = 0.9976, OLS on the 1425 observed rows, a fit of two trending series), so forecasting it largely means forecasting the official exchange rate (`results/summary/facts.md`).
 
 ## Description of the real file (`new_Data.csv`)
 

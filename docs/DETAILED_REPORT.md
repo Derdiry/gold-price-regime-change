@@ -45,7 +45,7 @@ Model code: [`src/models/patchtst.py`](../src/models/patchtst.py) implements cha
 | Global | Yahoo Finance (gold futures, GLD, UUP, BNO) and FRED (DGS10, CPI, M2), as a 2026-04-04 snapshot | No: third-party terms. It can be rebuilt with `src/data/fetchers.py` (`FRED_API_KEY` needed), but the result will not be byte-identical |
 | Sudan | ACLED weekly *Aggregated data on Africa* and the *political violence events by country-month-year* files | No: ACLED terms. The user downloads them into `data/raw/sudan/` (gitignored) |
 
-**Price and exchange rate.** The Sudan series tracks the official SDG/USD exchange rate closely (R² of log price on log exchange rate = 0.9976, a fit of two trending series), so forecasting it largely means forecasting the official exchange rate (OLS on the 1425 observed rows). Data: official reference prices for Sudanese 21-karat gold (2015–2022), obtained by the author; not redistributable; available on request for research purposes. Evidence: [`results/summary/facts.md`](../results/summary/facts.md).
+**Price and exchange rate.** The Sudan series tracks the official SDG/USD exchange rate closely (R² of log price on log exchange rate = 0.9976, OLS on the 1425 observed rows, a fit of two trending series), so forecasting it largely means forecasting the official exchange rate. Data: official reference prices for Sudanese 21-karat gold (2015–2022), obtained by the author; not redistributable; available on request for research purposes. Evidence: [`results/summary/facts.md`](../results/summary/facts.md).
 
 **Data-quality issues, handled in code; the raw file is unchanged.**
 - **Decimal shift.** Open = 117472 on 2016-12-03 is restored to 1174.72.
