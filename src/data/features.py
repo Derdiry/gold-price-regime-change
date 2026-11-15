@@ -196,7 +196,7 @@ def add_local_intl_spread(
     oz_to_gram: float = 31.1035,
 ) -> pd.DataFrame:
     """
-    Local-international spread: the international price converted to SDG per gram
+    Local-international spread: an international reference price expressed in SDG
     (column parity_price) and the relative difference of the local price from it.
     """
     if not all(c in df.columns for c in [local_price_col, intl_price_col, fx_col]):
@@ -272,9 +272,9 @@ def add_regional_differential(
     oz_to_gram: float = 31.1035,
 ) -> pd.DataFrame:
     """
-    Regional gold price differential ratios: the local price in USD per gram, its ratio to
-    the international price per gram and, if a regional series is present (it is off in
-    all reported runs), the ratio to that series.
+    Regional price ratios: the local price in USD, its ratio to the international
+    reference price and, if a regional series is present (it is off in all reported
+    runs), the ratio to that series.
     """
     if fx_col in df.columns and local_price_col in df.columns:
         df["price_usd_gram"] = df[local_price_col] / (df[fx_col] + 1e-8)

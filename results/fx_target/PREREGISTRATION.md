@@ -4,13 +4,9 @@ Written and committed before any FX-target model was trained or scored.
 `scripts/fx_target_report.py` refuses to run unless this file is committed,
 and copies it into its results file.
 
-## Relationship between price and exchange rate
+## Note
 
-[Redacted in the public release: the exact price formula and its fit bounds
-were removed from this section.] The Sudan price moves almost one-for-one
-with the official exchange rate (fx_rate, SDG per USD) and the international
-price; on a forward-filled day, fx_rate and intl_price_usd are forward-filled
-as well.
+One section was removed from this file for the public release for data-confidentiality reasons, and one sentence below was shortened; the rest is unchanged.
 
 ## Models and protocol (only the target changes)
 
@@ -32,9 +28,8 @@ as well.
 
 - **Main (a forecast):**
   `price_hat_{t+k} = P_t × fx_hat_{t+k} / fx_t`. P_t and fx_t are the last
-  observed price and FX at the origin, so the price is assumed to move in
-  proportion to FX, with the international price held at its origin value. FX persistence therefore
-  rebuilds to exactly price persistence.
+  observed price and FX at the origin. FX persistence therefore rebuilds to
+  price persistence.
 - **Diagnostic (uses future data, not a forecast):**
   `price_oracle_{t+k} = P_t × (fx_hat_{t+k} / fx_t) × (intl_{t+k} / intl_t)`.
   It uses the realised future international price. It shows how much of the

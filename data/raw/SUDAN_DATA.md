@@ -10,7 +10,7 @@ Official reference prices for Sudanese 21-karat gold (2015–2022), obtained by 
 
 ## What the series is
 
-The Sudan series is an official reference price that moves almost one-for-one with the official SDG/USD exchange rate (R² of log price on log exchange rate = 0.9976, OLS on the 1425 observed rows; `results/summary/facts.md`), so forecasting it largely means forecasting the official exchange rate.
+The Sudan series is an official reference price. The Sudan series tracks the official SDG/USD exchange rate closely (R² of log price on log exchange rate = 0.9976, a fit of two trending series), so forecasting it largely means forecasting the official exchange rate (OLS on the 1425 observed rows; `results/summary/facts.md`).
 
 ## Description of the real file (`new_Data.csv`)
 
@@ -19,10 +19,10 @@ The Sudan series is an official reference price that moves almost one-for-one wi
 - One decimal-shift outlier: Open = 117472 on 2016-12-03, restored to 1174.72 at load time (`src/data/quality.py`).
 - Columns:
   - `date` (d-Mon-YYYY)
-  - `Price` (local price, SDG per gram of 21-karat gold)
-  - `P/O 24` (international price, USD per troy ounce)
-  - `p/g 21` (USD per gram of 21-karat gold)
-  - `local USD` (official SDG per USD)
+  - `Price` (local price, SDG)
+  - `P/O 24` (international reference price, USD)
+  - `p/g 21` (a second reference price, USD)
+  - `local USD` (official exchange rate, SDG per USD)
   - `Open`, `High`, `Low`, `vol` (international daily open/high/low and volume)
 - SHA-256 of the real file: `14d6d75508467435f7cc6b11386343223b79de795cae3347db1c9b6f50039522` (`data/processed/v2/data_manifest_sudan.json`).
 

@@ -26,8 +26,8 @@ These files carry most of the research content, in suggested reading order.
 | [`src/data/processors.py`](../src/data/processors.py), [`tests/test_windows.py`](../tests/test_windows.py) | Chronological split, scalers fitted on training rows, and window building. Windows that touch the 404-day gap are dropped (`test_windows_touching_long_gap_are_dropped`). |
 | [`src/evaluation/stats.py`](../src/evaluation/stats.py), [`tests/test_stats.py`](../tests/test_stats.py) | Diebold–Mariano with the HLN correction and Newey–West variance (lag h − 1), MASE, and Holm adjustment. |
 | [`src/evaluation/metrics.py`](../src/evaluation/metrics.py), [`src/evaluation/baselines.py`](../src/evaluation/baselines.py) | Metrics in price units. Directional accuracy is also reported on non-zero changes only, with its attainable ceiling. Persistence, drift, ARIMA/ETS on log price, and the Sudan VECM. |
-| [`train.py`](../train.py) | The training entry point: validation-only model selection, the test scored once per final configuration, and provenance (commit and full config) in every run record. |
-| `results/*/PREREGISTRATION.md` | The verdict rule of each Phase 4 experiment and of the post-hoc diagnostic, committed before its test numbers. Phase 3 has none ([§3.4](#34-preregistration-and-test-use)). |
+| [`train.py`](../train.py) | The training entry point: validation-only model selection and provenance (commit and full config) in every run record. |
+| `results/*/PREREGISTRATION.md` | The verdict rule of each Phase 4 experiment and of the post-hoc diagnostic, committed in the (unpublished) development history before its test numbers. Phase 3 has none ([§3.4](#34-preregistration-and-test-use)). |
 | [`results/final/test_table.md`](../results/final/test_table.md) | Phase 3: every model × condition × horizon × track against all baselines. |
 | [`scripts/make_tables.py`](../scripts/make_tables.py), [`scripts/compare_regenerated.py`](../scripts/compare_regenerated.py) | Regenerate every table from saved files, and check the result against the committed tables. |
 | [`docs/CLAIMS.md`](CLAIMS.md), [`docs/implementation_notes.md`](implementation_notes.md) | The claims with their evidence; design decisions and run provenance. |
@@ -45,7 +45,7 @@ Model code: [`src/models/patchtst.py`](../src/models/patchtst.py) implements cha
 | Global | Yahoo Finance (gold futures, GLD, UUP, BNO) and FRED (DGS10, CPI, M2), as a 2026-04-04 snapshot | No: third-party terms. It can be rebuilt with `src/data/fetchers.py` (`FRED_API_KEY` needed), but the result will not be byte-identical |
 | Sudan | ACLED weekly *Aggregated data on Africa* and the *political violence events by country-month-year* files | No: ACLED terms. The user downloads them into `data/raw/sudan/` (gitignored) |
 
-**Price and exchange rate.** The Sudan series is an official reference price that moves almost one-for-one with the official SDG/USD exchange rate (R² of log price on log exchange rate = 0.9976, OLS on the 1425 observed rows), so forecasting it largely means forecasting the official exchange rate. Data: official reference prices for Sudanese 21-karat gold (2015–2022), obtained by the author; not redistributable; available on request for research purposes. Evidence: [`results/summary/facts.md`](../results/summary/facts.md).
+**Price and exchange rate.** The Sudan series tracks the official SDG/USD exchange rate closely (R² of log price on log exchange rate = 0.9976, a fit of two trending series), so forecasting it largely means forecasting the official exchange rate (OLS on the 1425 observed rows). Data: official reference prices for Sudanese 21-karat gold (2015–2022), obtained by the author; not redistributable; available on request for research purposes. Evidence: [`results/summary/facts.md`](../results/summary/facts.md).
 
 **Data-quality issues, handled in code; the raw file is unchanged.**
 - **Decimal shift.** Open = 117472 on 2016-12-03 is restored to 1174.72.
@@ -81,7 +81,7 @@ Evidence: [`results/data/split_summary.md`](../results/data/split_summary.md), [
 
 ### 3.4 Preregistration and test use
 
-The test set is evaluated once per final configuration. Each Phase 4 experiment's verdict rule, and that of the post-hoc diagnostic, is in a `PREREGISTRATION.md` committed before its test predictions were scored. The Phase 3 main comparison was not preregistered (rows 1–2):
+The protocol scores each final configuration on test once; this cannot be verified from repository files. Each Phase 4 experiment's verdict rule, and that of the post-hoc diagnostic, is in a `PREREGISTRATION.md` that was committed in the (unpublished) development history before its test predictions were scored; the commit hashes are recorded in each report. The FX-target preregistration had one section removed for this release (marked in the file). The Phase 3 main comparison was not preregistered (rows 1–2):
 
 | Experiment | Rule file | Commit | Committed before |
 |---|---|---|---|
@@ -109,7 +109,7 @@ Persistence (last value repeated), drift, ARIMA and ETS on log price (configurat
 | Sudan persistence (SDG/g) | 88.00 | 297.56 | 890.35 |
 | Global persistence (USD/oz) | 13.72 | 27.01 | 51.80 |
 
-None of the 21 statistical-baseline configurations beats persistence. The closest is global h = 7 ETS, at MASE 0.995, which is not significant. Baselines appear in every results table.
+None of the 21 statistical-baseline configurations beats persistence. The closest are ETS and ARIMA at global h = 7 (MASE 0.995 each), neither significant. Baselines appear in every results table.
 
 ---
 
@@ -129,7 +129,7 @@ Values are mean ± std over seeds 1–3, from [`results/final/test_table.md`](..
 | Global, 30 | 1.747–12.876 | ensemble (selected) | 50.04 ± 0.87 | 0.966 | no significant difference |
 
 - **The scale fix largely removes the failure.** Errors shrink from MinMax's 1.643–259.302× persistence to 0.966–1.392× for the best configuration of each setting. Not every selected configuration recovers: PatchTST with RevIN at Sudan h = 1 is still at MASE 12.761. The fix does not produce skill.
-- **No configuration beats persistence.** 72 configurations (60 model × condition cells plus 12 ensembles), and none beats persistence in all three seeds. On Sudan, every selected configuration has a significantly higher absolute loss than persistence in all three seeds (before Holm; at h = 30 not after Holm).
+- **No configuration beats persistence.** 72 configurations (60 model × condition cells plus 12 ensembles), and none beats persistence in all three seeds. On Sudan, every selected configuration has a significantly higher absolute loss than persistence in all three seeds (before Holm; after Holm all six remain significant at h = 1 and h = 7, and only PatchTST does at h = 30).
 - **Ensemble members** are mostly TFT and LSTM, chosen on validation ([`results/summary/ensembles.md`](../results/summary/ensembles.md)).
 
 ### 5.2 Headline across every experiment
@@ -164,7 +164,7 @@ Each experiment compares like with like, under the Phase 3 conditions of its mod
 - **4.3 ACLED conflict features** ([`results/acled/acled_table.md`](../results/acled/acled_table.md), [`results/acled/crosscheck.md`](../results/acled/crosscheck.md)).
   - Data: monthly political-violence events and fatalities for Sudan from the weekly file. Weeks that span two months are split pro rata by days. The series is cross-checked against ACLED's country-month file: r = 0.9958, totals 6218 vs 6217. Lags are 1, 2 and 3 completed months, with no look-ahead.
   - Main split: TFT and LSTM, 3 seeds. The only verdict is that conflict features hurt LSTM h = 7 at lag 3, and it does not survive Holm. All 18 cells show no consistent difference after Holm.
-  - Rolling check (lag 2, chosen on validation, one seed): they hurt TFT h = 1 and help LSTM h = 1 and h = 7 after Holm. The LSTM h = 1 gain appears in only 2 of 5 folds. This rolling check is not 3-seed confirmed.
+  - Rolling check (lag 2, chosen on validation, one seed): after Holm, on absolute loss only, conflict features hurt TFT h = 1 (also on squared loss) and help LSTM h = 1 and h = 7 (not on squared loss). The LSTM h = 1 gain appears in only 2 of 5 folds. This rolling check is not 3-seed confirmed.
 - **4.4 Regime dummies** ([`results/regime/regime_table.md`](../results/regime/regime_table.md)).
   - Design: with vs without, on rolling folds 4–5, where post-coup rows are in training, and on the main split.
   - After Holm, the dummies help nowhere and hurt 4 cells on absolute loss: fold 4 TFT h = 1, main-split TFT h = 1, LSTM h = 1 and LSTM h = 7.
@@ -191,12 +191,12 @@ Each experiment compares like with like, under the Phase 3 conditions of its mod
 
 - **The MinMax failure is a scaling artefact.** MinMax scaling fitted on the training range cannot represent test prices 6.4–9.9× higher. Scale-free targets remove most of the error.
 - **What remains is the difficulty of the series.** At these horizons, under this protocol, neither the deep models, nor Chronos, nor the extensions add information beyond the last observed price.
-- **Sudan.** The price moves almost one-for-one with the official SDG/USD rate (R² of log price on log exchange rate = 0.9976), so forecasting it largely means forecasting the official exchange rate through a currency collapse and a coup. There are 223 or fewer validation windows from one 7-month period. In that setting the Sudan h = 30 reversal is expected: a validation advantage over persistence did not carry over to test.
-- **Interpretation, not a tested result: official rate changes are policy decisions.** Because the series is an official reference price that moves almost one-for-one with the official SDG/USD rate, forecasting it largely means forecasting changes in the official rate, which are discrete policy decisions rather than market moves. This is consistent with persistence being hard to beat.
+- **Sudan.** The series tracks the official SDG/USD rate closely (R² of log price on log exchange rate = 0.9976, a fit of two trending series), so forecasting it largely means forecasting the official exchange rate through a currency collapse and a coup. There are 223 or fewer validation windows from one 7-month period. In that setting a validation advantage over persistence is weak evidence; at Sudan h = 30 it did not carry over to test.
+- **Interpretation, not a tested result: official rate changes are policy decisions.** Because the series is an official reference price that tracks the official SDG/USD rate closely, forecasting it largely means forecasting changes in the official rate, which are discrete policy decisions rather than market moves. This is consistent with persistence being hard to beat.
   - It is only partly consistent with the many zero-change days. Between consecutive quotes the official rate is unchanged in only 78 of 1424 steps (median absolute step 0.63%). Most zero-change days in the daily series therefore come from forward-filling days without a quote, not from an unchanged rate.
   - The largest moves come as single steps between quotes: 289.06 → 357.93 (2021-03-10 → 2021-03-22) and 454.62 → 567.80 (2022-03-07 → 2022-03-09). Across the 404-day gap the rate went from 79.06 to 231.56, and the data do not show when inside the gap that happened.
   - Evidence: [`results/summary/facts.md`](../results/summary/facts.md).
-- **Global.** Gold at daily-to-monthly horizons behaves close to a random walk here. Every selected global configuration is within MASE 0.966–1.783 of persistence, and none differs significantly in its favour.
+- **Global.** On the global track no configuration significantly beats a no-change forecast at 1-, 7- or 30-day horizons; every selected global configuration is within MASE 0.966–1.783 of persistence.
 - **Directional accuracy.** The low raw directional scores on Sudan mostly reflect forward-filled zero changes, which a continuous forecast can never match. On non-zero changes, models are near 50% (the "DA non-zero" columns, with their ceiling, in every table).
 
 ---

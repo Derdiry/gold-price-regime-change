@@ -17,12 +17,12 @@ Design decisions, data handling and run provenance, each with its evidence. The 
 | D9 | Chronological 70/15/15 split by rows | One fixed split shared by every model and baseline | `src/data/processors.py` (`chronological_split`) |
 | D10 | Global raw data: a 2026-04-04 Yahoo/FRED snapshot (not redistributed), hashed in the manifest | A fresh download changes history (revisions, adjusted prices) | `data/processed/v2/data_manifest_global.json` |
 | D11 | World Bank and regional-price sources are off in every reported run; ACLED is used only in the Phase 4.3 experiment | Only the experiment designed for conflict data uses it | `configs/model_config.yaml`, `results/acled/PREREGISTRATION.md` |
-| D12 | TFT batch size 8 in every run and condition; other hyperparameters are fixed and not tuned | Memory test before Phase 3 (smoke, 1 epoch, h = 30, both tracks): peak RSS 2.00 / 1.87 GiB at batch 8 vs 1.91 / 1.79 GiB at batch 2; 57 / 52 s vs 70 / 66 s per epoch (Sudan / global); both start above the 3 GiB memory gate | `configs/model_config.yaml` (`batch_size_overrides`) |
+| D12 | TFT batch size 8 was used in every run after a memory check before Phase 3 (logs not retained); hyperparameters were otherwise not tuned | Memory on an 8 GB CPU machine | `configs/model_config.yaml` (`batch_size_overrides`) |
 | D13 | The effective batch size is logged per run, and done flags are written only after the record, predictions and MLflow run are saved | Records must state what actually ran, and `--resume` must never skip an incomplete run | `results/runs/*.json`, `train.py` |
 
 ## Data provenance
 
-- `data/raw/new_Data.csv` (the ICCNC 2024 paper's dataset): official reference prices for Sudanese 21-karat gold (2015–2022), obtained by the author; not redistributable; available on request for research purposes. The series moves almost one-for-one with the official SDG/USD exchange rate (R² of log price on log SDG/USD 0.9976 on the 1425 observed rows, `results/summary/facts.md`); the `local USD` column (`fx_rate`) is the official rate.
+- `data/raw/new_Data.csv` (the ICCNC 2024 paper's dataset): official reference prices for Sudanese 21-karat gold (2015–2022), obtained by the author; not redistributable; available on request for research purposes. The Sudan series tracks the official SDG/USD exchange rate closely (R² of log price on log exchange rate = 0.9976, a fit of two trending series), so forecasting it largely means forecasting the official exchange rate (OLS on the 1425 observed rows, `results/summary/facts.md`); the `local USD` column (`fx_rate`) is the official rate.
 - The full Sudan file is not included in this repository. `data/raw/SUDAN_DATA.md` describes it, and `data/raw/new_Data_SYNTHETIC_sample.csv` (written by `scripts/make_synthetic_sample.py`) shows its column schema with synthetic values only.
 
 ## Known limitations
@@ -45,5 +45,5 @@ Design decisions, data handling and run provenance, each with its evidence. The 
 
 ## Phase 4 provenance
 
-- Chronos (4.2), conformal intervals with Chronos quantiles (4.6), FX target (4.7) and rolling origin (4.1) ran from 2026-10-29 10:00 to 2026-10-30 03:50 with no commits in between; all 415 FX and rolling run records carry the same commit and `git_dirty=False`.
+- Chronos (4.2), conformal intervals with Chronos quantiles (4.6), FX target (4.7) and rolling origin (4.1) ran from 2026-10-29 10:00 to 2026-10-30 03:50 with no commits in between; all 225 run records of these runs (75 in `results/fx_target/runs/`, 150 seed-1 records in `results/rolling/fold*/runs/`) carry the same commit and `git_dirty=False`. The other 24 records in `results/rolling/fold*/runs/` are the later seed-2 and seed-3 runs of the regime experiment.
 - Rolling origin uses **one seed per fold** (stated in `results/rolling/PREREGISTRATION.md`). Its folds overlap the Phase 3 validation and test periods, so they are not untouched data.

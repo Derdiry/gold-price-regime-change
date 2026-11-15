@@ -153,8 +153,8 @@ def fetch_global_macro(cfg: dict, save_dir: str = "data/raw/global") -> pd.DataF
 
 SUDAN_RAW_COLS = {
     "date": "date",
-    "Price": "price_sdg",        # SDG per gram — PRIMARY TARGET
-    "P/O 24": "intl_price_usd",  # international price per ounce (USD)
+    "Price": "price_sdg",        # local price (SDG) — PRIMARY TARGET
+    "P/O 24": "intl_price_usd",  # international reference price (USD)
     "p/g 21": "price_per_gram_21k",
     "local USD": "fx_rate",      # SDG/USD exchange rate
     "Open": "open",

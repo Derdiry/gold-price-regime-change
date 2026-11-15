@@ -316,7 +316,7 @@ def plot_sudan_overview(
 ) -> go.Figure:
     """
     Two-panel Sudan overview:
-      Top: local price (SDG) and the international price in SDG per gram
+      Top: local price (SDG) and the international reference price in SDG
       Bottom: FX rate (SDG/USD) and FX premium
 
     event_markers: list of {"date": "YYYY-MM-DD", "label": "Event name"}
@@ -324,7 +324,7 @@ def plot_sudan_overview(
     fig = make_subplots(
         rows=2, cols=1,
         shared_xaxes=True,
-        subplot_titles=["Gold Price: Local (SDG) and International (SDG/g)", "SDG/USD Exchange Rate"],
+        subplot_titles=["Gold Price: Local and International (SDG)", "SDG/USD Exchange Rate"],
         row_heights=[0.6, 0.4],
         vertical_spacing=0.08,
     )
@@ -339,7 +339,7 @@ def plot_sudan_overview(
     if "parity_price" in df.columns:
         fig.add_trace(go.Scatter(
             x=df.index, y=df["parity_price"],
-            name="International price in SDG/g",
+            name="International price in SDG",
             line=dict(color="#17becf", width=1.5, dash="dot"),
         ), row=1, col=1)
 

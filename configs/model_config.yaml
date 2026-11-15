@@ -48,7 +48,7 @@ data:
     end_date: "2022-12-31"
 
   # Columns
-  target_col: "price_sdg"         # SDG per gram (Sudan track) — renamed from "Price" in fetcher
+  target_col: "price_sdg"         # local price in SDG (Sudan track) — renamed from "Price" in fetcher
   global_target_col: "gold_close" # international gold close — prefixed in merge_global_track()
   date_col: "date"
 
@@ -173,9 +173,8 @@ training:
   # Per-model batch sizes for memory on an 8 GB CPU machine.
   # (v1 logged batch_size=32 to MLflow for these models; v2 logs the effective value.)
   # PatchTST: unchanged from v1.
-  # TFT: v1 used 2; v2 uses 8 in every condition (protocol choice D6, author
-  # decision 2026-10-28). Measured 1 epoch h=30: 57/52 s vs 70/66 s (Sudan/global),
-  # peak RSS 2.00/1.87 vs 1.91/1.79 GiB. See docs/implementation_notes.md.
+  # TFT: v1 used 2; v2 uses 8 in every condition after a memory check (logs not retained;
+  # author decision 2026-10-28). See docs/implementation_notes.md D12.
   batch_size_overrides:
     patchtst: {global: 8, sudan: 4}
     tft: {global: 8, sudan: 8}
